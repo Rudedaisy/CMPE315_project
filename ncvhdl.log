@@ -1,0 +1,164 @@
+ncvhdl: 15.20-s035: (c) Copyright 1995-2017 Cadence Design Systems, Inc.
+TOOL:	ncvhdl	15.20-s035: Started on Oct 29, 2018 at 01:19:14 EDT
+ncvhdl
+    -messages
+    -linedebug
+    -cdslib ../cadence/cds.lib
+    -hdlvar ../cadence/hdl.var
+    -smartorder
+    assign_0.vhd
+    assign_1.vhd
+    state_0.vhd
+    state_1.vhd
+    state_2.vhd
+    state_3.vhd
+    state_4.vhd
+    state_5.vhd
+    state_6.vhd
+    state_7.vhd
+    state_8.vhd
+    state_9.vhd
+    state_10.vhd
+    state_11.vhd
+    state_12.vhd
+    state_13.vhd
+    state_14.vhd
+    state_15.vhd
+    tx.vhd
+    inv.vhd
+    mux2_1.vhd
+    states_test.vhd
+
+assign_1.vhd:
+	errors: 0, warnings: 0
+state_15.vhd:
+	errors: 0, warnings: 0
+assign_0.vhd:
+	errors: 0, warnings: 0
+state_14.vhd:
+	errors: 0, warnings: 0
+state_13.vhd:
+	errors: 0, warnings: 0
+state_12.vhd:
+	errors: 0, warnings: 0
+state_11.vhd:
+	errors: 0, warnings: 0
+state_10.vhd:
+	errors: 0, warnings: 0
+state_9.vhd:
+	errors: 0, warnings: 0
+state_8.vhd:
+	errors: 0, warnings: 0
+state_7.vhd:
+	errors: 0, warnings: 0
+state_6.vhd:
+	errors: 0, warnings: 0
+state_5.vhd:
+	errors: 0, warnings: 0
+state_4.vhd:
+	errors: 0, warnings: 0
+state_3.vhd:
+	errors: 0, warnings: 0
+state_2.vhd:
+	errors: 0, warnings: 0
+state_1.vhd:
+	errors: 0, warnings: 0
+state_0.vhd:
+	errors: 0, warnings: 0
+states_test.vhd:
+	errors: 0, warnings: 0
+inv.vhd:
+	errors: 0, warnings: 0
+tx.vhd:
+	errors: 0, warnings: 0
+mux2_1.vhd:
+	errors: 0, warnings: 0
+VHDL.ASSIGN_1 (entity):
+	streams: 2, words: 44
+VHDL.ASSIGN_1:STRUCTURAL (architecture):
+	streams: 1, words: 99
+VHDL.STATE_15 (entity):
+	streams: 3, words: 248
+VHDL.STATE_15:STRUCTURAL (architecture):
+	streams: 2, words: 405
+VHDL.ASSIGN_0 (entity):
+	streams: 2, words: 44
+VHDL.ASSIGN_0:STRUCTURAL (architecture):
+	streams: 1, words: 99
+VHDL.STATE_14 (entity):
+	streams: 3, words: 248
+VHDL.STATE_14:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_13 (entity):
+	streams: 3, words: 248
+VHDL.STATE_13:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_12 (entity):
+	streams: 3, words: 248
+VHDL.STATE_12:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_11 (entity):
+	streams: 3, words: 248
+VHDL.STATE_11:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_10 (entity):
+	streams: 3, words: 248
+VHDL.STATE_10:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_9 (entity):
+	streams: 3, words: 248
+VHDL.STATE_9:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_8 (entity):
+	streams: 3, words: 248
+VHDL.STATE_8:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_7 (entity):
+	streams: 3, words: 248
+VHDL.STATE_7:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_6 (entity):
+	streams: 3, words: 248
+VHDL.STATE_6:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_5 (entity):
+	streams: 3, words: 248
+VHDL.STATE_5:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_4 (entity):
+	streams: 3, words: 248
+VHDL.STATE_4:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_3 (entity):
+	streams: 3, words: 248
+VHDL.STATE_3:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_2 (entity):
+	streams: 3, words: 248
+VHDL.STATE_2:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_1 (entity):
+	streams: 3, words: 248
+VHDL.STATE_1:STRUCTURAL (architecture):
+	streams: 3, words: 611
+VHDL.STATE_0 (entity):
+	streams: 3, words: 248
+VHDL.STATE_0:STRUCTURAL (architecture):
+	streams: 2, words: 405
+VHDL.STATES_TEST (entity):
+	streams: 1, words: 38
+VHDL.STATES_TEST:TEST (architecture):
+	streams: 17, words: 12180
+VHDL.INV (entity):
+	streams: 3, words: 50
+VHDL.INV:STRUCTURAL (architecture):
+	streams: 1, words: 99
+VHDL.TX (entity):
+	streams: 5, words: 62
+VHDL.TX:STRUCTURAL (architecture):
+	streams: 1, words: 99
+VHDL.MUX2_1 (entity):
+	streams: 5, words: 62
+VHDL.MUX2_1:STRUCTURAL (architecture):
+	streams: 3, words: 611
+TOOL:	ncvhdl	15.20-s035: Exiting on Oct 29, 2018 at 01:19:14 EDT  (total: 00:00:00)

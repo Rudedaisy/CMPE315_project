@@ -1,0 +1,20 @@
+ncsim: 15.20-s035: (c) Copyright 1995-2017 Cadence Design Systems, Inc.
+TOOL:	ncsim	15.20-s035: Started on Oct 29, 2018 at 00:30:43 EDT
+ncsim
+    -input ncsim.run
+    -messages
+    -cdslib ../cadence/cds.lib
+    -hdlvar ../cadence/hdl.var
+    states_test
+
+Loading snapshot vhdl.states_test:test .................... Done
+ncsim> run 180 ns
+0000
+0001
+0010
+0011
+0100
+0101
+0110
+011TOOL:	ncsim	15.20-s035: Exiting on Oct 29, 2018 at 00:59:16 EDT  (total: 00:34:11)
+L:	ncsim	15.20-s035: Exiting on Oct 29, 2018 at 00:30:43 EDT  (total: 00:00:00)
