@@ -1,6 +1,6 @@
 --
 -- Entity: states_test
--- Architecture : vhdl 
+-- Architecture : vhdl poop 
 -- Author: ehanson1
 -- Created On: 09/09/2018 
 --
