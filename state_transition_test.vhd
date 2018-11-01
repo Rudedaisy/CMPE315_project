@@ -15,25 +15,29 @@ end state_transition_test;
 
 architecture test of state_transition_test is
 
-component alu_4
-    port (
-		A 	: in  std_logic_vector(3 downto 0);
-		B 	: in  std_logic_vector(3 downto 0);
-		Cin	: in  std_logic;
-		S0 	: in  std_logic;
-		S1 	: in  std_logic;
-		G 	: out std_logic_vector(3 downto 0);
-		Cout: out std_logic);
+component state_transition
+	port (
+		start	 : in  std_logic;
+		rd_wr	 : in  std_logic;
+		tmavl	 : in  std_logic;
+		tmavr	 : in  std_logic;
+		count	 : in  std_logic_vector(2 downto 0);
+		is_s0	 : in  std_logic;
+		is_s4	 : in  std_logic;
+		is_s5	 : in  std_logic;
+		is_s6	 : in  std_logic;
+		s_next   : out std_logic_vector(2 downto 0));
 end component;
 
-for alu1 : alu_4 use entity work.alu_4(structural);
-	signal A_sig,B_sig,G_out				: std_logic_vector(3 downto 0);
-	signal Cin_sig,S0_sig,S1_sig,Cout_out	: std_logic;
+for state_transition_1 : state_transition use entity work.state_transition(structural);
+	signal count, s_next					: std_logic_vector(2 downto 0);
+	signal start, rd_wr, tmavl, tmavr		: std_logic;
+	signal is_s0, is_s4, is_s5, is_s6		: std_logic;
 	signal clock : std_logic;
 
 begin
 
-alu1 : alu_4 port map (A_sig,B_sig,Cin_sig,S0_sig,S1_sig,G_out,Cout_out);
+state_transition_1 : state_transition port map (start, rd_wr, tmavl, tmavr, count, is_s0, is_s4, is_s5, is_s6, s_next);
 
 clk : process
 	begin  -- process clk
@@ -45,11 +49,12 @@ clk : process
 
 io_process: process
 
-	file infile  : text is in "alu_4_in.txt";
-	file outfile : text is out "alu_4_out.txt";
-	variable A1,B1					: std_logic_vector(3 downto 0);
-	variable controls				: std_logic_vector(2 downto 0);	-- [Cin,S0,S1]
-	variable outs					: std_logic_vector(4 downto 0); -- [G,Cout]
+	file infile  : text is in "state_transition_in.txt";
+	--file outfile : text is out "state_transition_out.txt";
+	variable controls				: std_logic_vector(3 downto 0);
+	variable count_sig				: std_logic_vector(2 downto 0);	
+	variable states					: std_logic_vector(3 downto 0); 
+	variable s_next_sig				: std_logic_vector(2 downto 0);
 	variable buf 					: line;
 
 begin
@@ -57,27 +62,31 @@ begin
 	if not (endfile(infile)) then 
 
 
-		readline(infile,buf);	-- 1st line = A
-		read (buf,A1);
-		A_sig<=A1;
+		readline(infile,buf);	-- 1st line = controls
+		read (buf,controls);
+		start<=controls(3);
+		rd_wr<=controls(2);
+		tmavl<=controls(1);
+		tmavr<=controls(0);
 		
-		readline(infile,buf);	-- 2nd line = B
-		read (buf,B1);
-		B_sig<=B1;
+		readline(infile,buf);	-- 2nd line = count
+		read (buf,count_sig);
+		count<=count_sig;
 		
-		readline(infile,buf);	-- 3rd line = Cin,S0,S1
-		read (buf, controls);
-		Cin_sig<=controls(2);
-		S0_sig<=controls(1);
-		S1_sig<=controls(0);
+		readline(infile,buf);	-- 3rd line = state_signals
+		read (buf, states);
+		is_s0<=states(3);
+		is_s4<=states(2);
+		is_s5<=states(1);
+		is_s6<=states(0);
 
 		wait until falling_edge(clock);
 
-		outs(4 downto 1) := G_out;
-		outs(0) := Cout_out;
+		s_next_sig := s_next;
 
-		write(buf,outs);
-		writeline(outfile,buf);
+		write(buf,s_next_sig);
+		writeline(output,buf);
+		--writeline(outfile,buf);
 
 	end if;
 
