@@ -1,5 +1,5 @@
 --
--- Entity: tag
+-- Entity: cache
 -- Architecture: structural
 -- Author: hx41455
 -- created on: 2018/10/29
@@ -9,18 +9,18 @@ library std;
 library ieee;
 use ieee.std_logic_11644.all;
 
-entity tag is
+entity cache is
   port(adr : in  std_logic_vector(1 downto 0);
        d   : in  std_logic_vector(7 downto 0);
        sel : in  std_logic_vector(7 downto 0);
        en  : in  std_logic;
        w   : in  std_logic;
        r   : in  std_logic;
-       eqv : out std_logic);
-end tag;
+       q   : out std_logic_vector(7 downto 0));
+end cache;
 
-architecture structural of tag is
-  component tag_block
+architecture structural of cache is
+  component cache_block
     port(adr : in  std_logic_vector(1 downto 0);
          d   : in  std_logic_vector(7 downto 0);
          w   : in  std_logic;
@@ -33,20 +33,15 @@ architecture structural of tag is
          input3 : in  std_logic;
          output : out std_logic);
   end component;
-  component comp3x2_1
-    port(input1 : in  std_logic_vector(2 downto 0);
-         input2 : in  std_logic_vector(2 downto 0);
-         output : out std_logic);
-  end component;
-  
-  for tag_block_1,
-    tag_block_2,
-    tag_block_3,
-    tag_block_4,
-    tag_block_5,
-    tag_block_6,
-    tag_block_7,
-    tag_block_8 : tag_block use entity work.tag_block(structural);
+
+  for cache_block_1,
+    cache_block_2,
+    cache_block_3,
+    cache_block_4,
+    cache_block_5,
+    cache_block_6,
+    cache_block_7,
+    cache_block_8 : cache_block use entity work.cache_block(structural);
   for and3_1_1,
     and3_1_2,
     and3_1_3,
@@ -63,12 +58,9 @@ architecture structural of tag is
     and3_1_14,
     and3_1_15,
     and3_1_16 : and3_1 use entity work.and3_1(structural);
-  for comp3x2_1_1 : comp3x2_1 use entity work.comp3x2_1(structural);
 
-  
   signal w000,w001,w010,w011,w100,w101,w110,w111,
     r000,r001,r010,r011,r100,r101,r110,r111 : std_logic;
-  signal q : std_logic_vector(2 downto 0);
 
 begin
   and3_1_1 :  and3_1 port map(sel(0), en, w, w000);
@@ -89,14 +81,12 @@ begin
   and3_1_15 : and3_1 port map(sel(6), en, r, r110);
   and3_1_16 : and3_1 port map(sel(7), en, r, r111);
 
-  tag_block_1 : tag_block port map(adr, d, w000, r000, q);
-  tag_block_2 : tag_block port map(adr, d, w001, r001, q);
-  tag_block_3 : tag_block port map(adr, d, w010, r010, q);
-  tag_block_4 : tag_block port map(adr, d, w011, r011, q);
-  tag_block_5 : tag_block port map(adr, d, w100, r100, q);
-  tag_block_6 : tag_block port map(adr, d, w101, r101, q);
-  tag_block_7 : tag_block port map(adr, d, w110, r110, q);
-  tag_block_8 : tag_block port map(adr, d, w111, r111, q);
-
-  comp3x2_1_1 : comp3x2_1 port map(d, q, eqv);
+  cache_block_1 : cache_block port map(adr, d, w000, r000, q);
+  cache_block_2 : cache_block port map(adr, d, w001, r001, q);
+  cache_block_3 : cache_block port map(adr, d, w010, r010, q);
+  cache_block_4 : cache_block port map(adr, d, w011, r011, q);
+  cache_block_5 : cache_block port map(adr, d, w100, r100, q);
+  cache_block_6 : cache_block port map(adr, d, w101, r101, q);
+  cache_block_7 : cache_block port map(adr, d, w110, r110, q);
+  cache_block_8 : cache_block port map(adr, d, w111, r111, q);
 end structural;
