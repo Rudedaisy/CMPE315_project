@@ -38,8 +38,8 @@ architecture structural of decd3_8 is
       output: out std_logic);
   end component;
 
-for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
-for nor3_1_1, nor3_1_2, nor3_1_3, nor3_1_4, nor3_1_5, nor3_1_6, nor3_1_7, nor3_1_8: use entity work.nor3_1(structural);
+for inv_1, inv_2, inv_3 : inv use entity work.inv(structural);
+for nor3_1_1, nor3_1_2, nor3_1_3, nor3_1_4, nor3_1_5, nor3_1_6, nor3_1_7, nor3_1_8 : nor3_1 use entity work.nor3_1(structural);
 
   signal not_sel1, not_sel2, not_sel3: std_logic;
 
