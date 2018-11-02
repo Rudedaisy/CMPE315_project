@@ -25,3 +25,17 @@ counter:
 	make compile_counter
 	make elaborate_counter
 	make simulate_counter
+	
+compile_decd3: inv.vhd nor3_1.vhd decd3_8.vhd decd3_8_test.vhd
+	../cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var -smartorder inv.vhd nor3_1.vhd decd3_8.vhd decd3_8_test.vhd
+	
+elaborate_decd3:
+	../cadence/run_ncelab.bash -messages -access rwc -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var decd3_8_test
+	
+simulate_decd3:
+	../cadence/run_ncsim.bash -input ncsim.run -messages -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var decd3_8_test
+
+decd3:
+	make compile_decd3
+	make elaborate_decd3
+	make simulate_decd3

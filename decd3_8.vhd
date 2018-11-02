@@ -5,9 +5,9 @@
 -- created on: 2018/10/29
 --
 
-library std;
-library ieee;
-use ieee.std_logic_11644.all;
+library STD;
+library IEEE;
+use IEEE.std_logic_1164.all;
 
 entity decd3_8 is
   port(
@@ -46,15 +46,15 @@ for nor3_1_1, nor3_1_2, nor3_1_3, nor3_1_4, nor3_1_5, nor3_1_6, nor3_1_7, nor3_1
 begin
   inv_1:        inv port map(sel1, not_sel1);
   inv_2:        inv port map(sel2, not_sel2);
-  inv_1:        inv port map(sel3, not_sel3);
+  inv_3:        inv port map(sel3, not_sel3);
 
-  nor3_1_1:     nor3_1 port map(sel1,sel2,sel3);                --000
-  nor3_1_2:     nor3_1 port map(not_sel1,sel2,sel3);            --001
-  nor3_1_3:     nor3_1 port map(sel1,not_sel2,sel3);            --010
-  nor3_1_4:     nor3_1 port map(not_sel1,not_sel2,sel3);        --011
-  nor3_1_5:     nor3_1 port map(sel1,sel2,not_sel3);            --100
-  nor3_1_6:     nor3_1 port map(not_sel1,sel2,not_sel3);        --101
-  nor3_1_7:     nor3_1 port map(sel1,not_sel2,not_sel3);        --110
-  nor3_1_8:     nor3_1 port map(not_sel1,not_sel2,not_sel3);    --111
+  nor3_1_1:     nor3_1 port map(sel1,sel2,sel3, output1);                --000
+  nor3_1_2:     nor3_1 port map(not_sel1,sel2,sel3, output2);            --001
+  nor3_1_3:     nor3_1 port map(sel1,not_sel2,sel3, output3);            --010
+  nor3_1_4:     nor3_1 port map(not_sel1,not_sel2,sel3, output4);        --011
+  nor3_1_5:     nor3_1 port map(sel1,sel2,not_sel3, output5);            --100
+  nor3_1_6:     nor3_1 port map(not_sel1,sel2,not_sel3, output6);        --101
+  nor3_1_7:     nor3_1 port map(sel1,not_sel2,not_sel3, output7);        --110
+  nor3_1_8:     nor3_1 port map(not_sel1,not_sel2,not_sel3, output8);    --111
 
 end structural;
