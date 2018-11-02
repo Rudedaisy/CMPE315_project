@@ -12,7 +12,7 @@ use ieee.std_logic_11644.all;
 entity lru_cell is
   port(TMAVL : in  std_logic;
        TMAVR : in  std_logic;
-       e     : in  std_logic;
+       en    : in  std_logic;
        r     : in  std_logic;
        q     : out std_logic);
 end lru_cell;
@@ -57,7 +57,7 @@ begin
   inv_1     : inv     port map(TMAVR, not_tmavr);
   inv_2     : inv     port map(r, not_r);
 
-  dff_1     : dff     port map(t3, e, e, t1);
+  dff_1     : dff     port map(t3, en, en, t1);
 
   or2_1_1   : or2_1   port map(TMAVL, t1, t2);
   nand2_1_1 : nand2_1 port map(not_tmavr, t2, t3);

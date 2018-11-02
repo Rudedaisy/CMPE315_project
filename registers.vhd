@@ -15,9 +15,9 @@ entity registers is
        READ_WRITE  : in  std_logic;
        START       : in  std_logic;
        CLK         : in  std_logic;
-       address     : out std_logic_vector(7 downto 8);
-       data        : out std_logic_vector(7 downto 8);
-       r_w         : out std_logic);
+       ADDRESS     : out std_logic_vector(7 downto 8);
+       DATA        : out std_logic_vector(7 downto 8);
+       R_W         : out std_logic);
 end registers;
 
 architecture structural of registers is
@@ -38,7 +38,7 @@ architecture structural of registers is
   for reg_rw : register_cell use entity work.register_cell(structural);
 
 begin
-  reg_rw   : register_cell port map(READ_WRITE, START, CLK, r_w);
-  reg_adr  : register_byte port map(CPU_ADDRESS, START, CLK, address);
-  reg_data : register_byte port map(CPU_DATA, START, CLK, data);
+  reg_rw   : register_cell port map(READ_WRITE, START, CLK, R_W);
+  reg_adr  : register_byte port map(CPU_ADDRESS, START, CLK, ADDRESS);
+  reg_data : register_byte port map(CPU_DATA, START, CLK, DATA);
 end structural;
