@@ -21,23 +21,25 @@ component state_transition
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
-		count	 : in  std_logic_vector(2 downto 0);
+		count	 : in  std_logic_vector(3 downto 0);
 		is_s0	 : in  std_logic;
+		is_s1	 : in  std_logic;
+		is_s2	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
-		is_s6	 : in  std_logic;
 		s_next   : out std_logic_vector(2 downto 0));
 end component;
 
 for state_transition_1 : state_transition use entity work.state_transition(structural);
-	signal count, s_next					: std_logic_vector(2 downto 0);
+	signal s_next							: std_logic_vector(2 downto 0);
+	signal count 							: std_logic_vector(3 downto 0);
 	signal start, rd_wr, tmavl, tmavr		: std_logic;
-	signal is_s0, is_s4, is_s5, is_s6		: std_logic;
+	signal is_s0, is_s1, is_s2, is_s4, is_s5: std_logic;
 	signal clock : std_logic;
 
 begin
 
-state_transition_1 : state_transition port map (start, rd_wr, tmavl, tmavr, count, is_s0, is_s4, is_s5, is_s6, s_next);
+state_transition_1 : state_transition port map (start, rd_wr, tmavl, tmavr, count, is_s0, is_s1, is_s2, is_s4, is_s5, s_next);
 
 clk : process
 	begin  -- process clk
@@ -52,8 +54,8 @@ io_process: process
 	file infile  : text is in "state_transition_in.txt";
 	--file outfile : text is out "state_transition_out.txt";
 	variable controls				: std_logic_vector(3 downto 0);
-	variable count_sig				: std_logic_vector(2 downto 0);	
-	variable states					: std_logic_vector(3 downto 0); 
+	variable count_sig				: std_logic_vector(3 downto 0);	
+	variable states					: std_logic_vector(4 downto 0); 
 	variable s_next_sig				: std_logic_vector(2 downto 0);
 	variable buf 					: line;
 
@@ -75,10 +77,11 @@ begin
 		
 		readline(infile,buf);	-- 3rd line = state_signals
 		read (buf, states);
-		is_s0<=states(3);
-		is_s4<=states(2);
-		is_s5<=states(1);
-		is_s6<=states(0);
+		is_s0<=states(4);
+		is_s1<=states(3);
+		is_s2<=states(2);
+		is_s4<=states(1);
+		is_s5<=states(0);
 
 		wait until falling_edge(clock);
 
