@@ -21,8 +21,8 @@ architecture structural of xor3_1 is
 
 begin
 
-  output <= (input1 and not(input2) and not(input3))
-            or (not(input1) and input2 and not(input3))
-            or (not(input1) and not(input2) and input3);
+  output <= (input1 and not(input2) and not(input3)) or
+            (not(input1) and input2 and not(input3)) or
+            (not(input1) and not(input2) and input3);
 
 end structural;

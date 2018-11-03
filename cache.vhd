@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity cache is
   port(BYTE_ADR  : in  std_logic_vector(1 downto 0);
@@ -34,59 +34,58 @@ architecture structural of cache is
          output : out std_logic);
   end component;
 
-  for cache_block_1,
+  for cache_block_0,
+    cache_block_1,
     cache_block_2,
     cache_block_3,
     cache_block_4,
     cache_block_5,
     cache_block_6,
-    cache_block_7,
-    cache_block_8 : cache_block use entity work.cache_block(structural);
-  for and3_1_1,
-    and3_1_2,
-    and3_1_3,
-    and3_1_4,
-    and3_1_5,
-    and3_1_6,
-    and3_1_7,
-    and3_1_8,
-    and3_1_9,
-    and3_1_10,
-    and3_1_11,
-    and3_1_12,
-    and3_1_13,
-    and3_1_14,
-    and3_1_15,
-    and3_1_16 : and3_1 use entity work.and3_1(structural);
+    cache_block_7 : cache_block use entity work.cache_block(structural);
+  for and3_1_w0,
+    and3_1_w1,
+    and3_1_w2,
+    and3_1_w3,
+    and3_1_w4,
+    and3_1_w5,
+    and3_1_w6,
+    and3_1_w7,
+    and3_1_r0,
+    and3_1_r1,
+    and3_1_r2,
+    and3_1_r3,
+    and3_1_r4,
+    and3_1_r5,
+    and3_1_r6,
+    and3_1_r7 : and3_1 use entity work.and3_1(structural);
 
-  signal w000,w001,w010,w011,w100,w101,w110,w111,
-    r000,r001,r010,r011,r100,r101,r110,r111 : std_logic;
+  signal w, r : std_logic_vector(7 downto 0);
 
 begin
-  and3_1_1 :  and3_1 port map(BLOCK_SEL(0), CACHE_EN, WRITE_EN, w000);
-  and3_1_2 :  and3_1 port map(BLOCK_SEL(1), CACHE_EN, WRITE_EN, w001);
-  and3_1_3 :  and3_1 port map(BLOCK_SEL(2), CACHE_EN, WRITE_EN, w010);
-  and3_1_4 :  and3_1 port map(BLOCK_SEL(3), CACHE_EN, WRITE_EN, w011);
-  and3_1_5 :  and3_1 port map(BLOCK_SEL(4), CACHE_EN, WRITE_EN, w100);
-  and3_1_6 :  and3_1 port map(BLOCK_SEL(5), CACHE_EN, WRITE_EN, w101);
-  and3_1_7 :  and3_1 port map(BLOCK_SEL(6), CACHE_EN, WRITE_EN, w110);
-  and3_1_8 :  and3_1 port map(BLOCK_SEL(7), CACHE_EN, WRITE_EN, w111);
+  and3_1_w0 : and3_1 port map(BLOCK_SEL(0), CACHE_EN, WRITE_EN, w(0));
+  and3_1_w1 : and3_1 port map(BLOCK_SEL(1), CACHE_EN, WRITE_EN, w(1));
+  and3_1_w2 : and3_1 port map(BLOCK_SEL(2), CACHE_EN, WRITE_EN, w(2));
+  and3_1_w3 : and3_1 port map(BLOCK_SEL(3), CACHE_EN, WRITE_EN, w(3));
+  and3_1_w4 : and3_1 port map(BLOCK_SEL(4), CACHE_EN, WRITE_EN, w(4));
+  and3_1_w5 : and3_1 port map(BLOCK_SEL(5), CACHE_EN, WRITE_EN, w(5));
+  and3_1_w6 : and3_1 port map(BLOCK_SEL(6), CACHE_EN, WRITE_EN, w(6));
+  and3_1_w7 : and3_1 port map(BLOCK_SEL(7), CACHE_EN, WRITE_EN, w(7));
 
-  and3_1_9 :  and3_1 port map(BLOCK_SEL(0), CACHE_EN, READ_EN r000);
-  and3_1_10 : and3_1 port map(BLOCK_SEL(1), CACHE_EN, READ_EN r001);
-  and3_1_11 : and3_1 port map(BLOCK_SEL(2), CACHE_EN, READ_EN r010);
-  and3_1_12 : and3_1 port map(BLOCK_SEL(3), CACHE_EN, READ_EN r011);
-  and3_1_13 : and3_1 port map(BLOCK_SEL(4), CACHE_EN, READ_EN r100);
-  and3_1_14 : and3_1 port map(BLOCK_SEL(5), CACHE_EN, READ_EN r101);
-  and3_1_15 : and3_1 port map(BLOCK_SEL(6), CACHE_EN, READ_EN r110);
-  and3_1_16 : and3_1 port map(BLOCK_SEL(7), CACHE_EN, READ_EN r111);
+  and3_1_r0 : and3_1 port map(BLOCK_SEL(0), CACHE_EN, READ_EN, r(0));
+  and3_1_r1 : and3_1 port map(BLOCK_SEL(1), CACHE_EN, READ_EN, r(1));
+  and3_1_r2 : and3_1 port map(BLOCK_SEL(2), CACHE_EN, READ_EN, r(2));
+  and3_1_r3 : and3_1 port map(BLOCK_SEL(3), CACHE_EN, READ_EN, r(3));
+  and3_1_r4 : and3_1 port map(BLOCK_SEL(4), CACHE_EN, READ_EN, r(4));
+  and3_1_r5 : and3_1 port map(BLOCK_SEL(5), CACHE_EN, READ_EN, r(5));
+  and3_1_r6 : and3_1 port map(BLOCK_SEL(6), CACHE_EN, READ_EN, r(6));
+  and3_1_r7 : and3_1 port map(BLOCK_SEL(7), CACHE_EN, READ_EN, r(7));
 
-  cache_block_1 : cache_block port map(BYTE_ADR, IN_DATA, w000, r000, OUT_DATA);
-  cache_block_2 : cache_block port map(BYTE_ADR, IN_DATA, w001, r001, OUT_DATA);
-  cache_block_3 : cache_block port map(BYTE_ADR, IN_DATA, w010, r010, OUT_DATA);
-  cache_block_4 : cache_block port map(BYTE_ADR, IN_DATA, w011, r011, OUT_DATA);
-  cache_block_5 : cache_block port map(BYTE_ADR, IN_DATA, w100, r100, OUT_DATA);
-  cache_block_6 : cache_block port map(BYTE_ADR, IN_DATA, w101, r101, OUT_DATA);
-  cache_block_7 : cache_block port map(BYTE_ADR, IN_DATA, w110, r110, OUT_DATA);
-  cache_block_8 : cache_block port map(BYTE_ADR, IN_DATA, w111, r111, OUT_DATA);
+  cache_block_0 : cache_block port map(BYTE_ADR, IN_DATA, w(0), r(0), OUT_DATA);
+  cache_block_1 : cache_block port map(BYTE_ADR, IN_DATA, w(1), r(1), OUT_DATA);
+  cache_block_2 : cache_block port map(BYTE_ADR, IN_DATA, w(2), r(2), OUT_DATA);
+  cache_block_3 : cache_block port map(BYTE_ADR, IN_DATA, w(3), r(3), OUT_DATA);
+  cache_block_4 : cache_block port map(BYTE_ADR, IN_DATA, w(4), r(4), OUT_DATA);
+  cache_block_5 : cache_block port map(BYTE_ADR, IN_DATA, w(5), r(5), OUT_DATA);
+  cache_block_6 : cache_block port map(BYTE_ADR, IN_DATA, w(6), r(6), OUT_DATA);
+  cache_block_7 : cache_block port map(BYTE_ADR, IN_DATA, w(7), r(7), OUT_DATA);
 end structural;

@@ -7,16 +7,16 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity registers is
-  port(CPU_ADDRESS : in  std_logic_vector(7 downto 8);
-       CPU_DATA    : in  std_logic_vector(7 downto 8);
+  port(CPU_ADDRESS : in  std_logic_vector(7 downto 0);
+       CPU_DATA    : in  std_logic_vector(7 downto 0);
        READ_WRITE  : in  std_logic;
        START       : in  std_logic;
        CLK         : in  std_logic;
-       ADDRESS     : out std_logic_vector(7 downto 8);
-       DATA        : out std_logic_vector(7 downto 8);
+       ADDRESS     : out std_logic_vector(7 downto 0);
+       DATA        : out std_logic_vector(7 downto 0);
        R_W         : out std_logic);
 end registers;
 
