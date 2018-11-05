@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity tag_block is
   port(d : in  std_logic_vector(2 downto 0);

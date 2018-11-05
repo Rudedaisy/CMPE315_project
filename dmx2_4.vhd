@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity dmx2_4 is
   port(sel     : in  std_logic_vector(1 downto 0);
@@ -36,12 +36,12 @@ architecture structural of dmx2_4 is
   signal not_sel1, not_sel2, not_en: std_logic;
 
 begin
-  inv_1    : inv    port map(sel1, not_sel1);
-  inv_2    : inv    port map(sel2, not_sel2);
+  inv_1    : inv    port map(sel(0), not_sel1);
+  inv_2    : inv    port map(sel(1), not_sel2);
   inv_3    : inv    port map(en, not_en);
   
-  nor3_1_1 : nor3_1 port map(not_en, sel1, sel2);        --00
-  nor3_1_2 : nor3_1 port map(not_en, not_sel1, sel2);    --01
-  nor3_1_3 : nor3_1 port map(not_en, sel1, not_sel2);    --10
-  nor3_1_4 : nor3_1 port map(not_en, not_sel1, not_sel2);--11
+  nor3_1_1 : nor3_1 port map(not_en, sel(0), sel(1), output1);     --00
+  nor3_1_2 : nor3_1 port map(not_en, not_sel1, sel(1), output2);   --01
+  nor3_1_3 : nor3_1 port map(not_en, sel(0), not_sel2, output3);   --10
+  nor3_1_4 : nor3_1 port map(not_en, not_sel1, not_sel2, output4); --11
 end structural;

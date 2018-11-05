@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity cache_block is
   port(adr : in  std_logic_vector(1 downto 0);
@@ -33,20 +33,20 @@ architecture structural of cache_block is
          output4 : out std_logic);
   end component;
 
-  for cache_byte_1,
+  for cache_byte_0,
+    cache_byte_1,
     cache_byte_2,
-    cache_byte_3,
-    cache_byte_4 : cache_byte use entity work.cache_byte(structural);
+    cache_byte_3 : cache_byte use entity work.cache_byte(structural);
   for dmx2_4_1, dmx2_4_2 : dmx2_4 use entity work.dmx2_4(structural);
 
-  signal w00,w01,w10,w11,r00,r01,r10,r11: std_logic;
+  signal we, re : std_logic_vector(3 downto 0);
 
 begin
-  dmx2_4_1     : dmx2_4     port map(adr,w,s00,w01,w10,w11);
-  dmx2_4_2     : dmx2_4     port map(adr,r,r00,r01,r10,r11);
+  dmx2_4_1     : dmx2_4     port map(adr,w,we(0),we(1),we(2),we(3));
+  dmx2_4_2     : dmx2_4     port map(adr,r,re(0),re(1),re(2),re(3));
     
-  cache_byte_1 : cache_byte port map(d,w00,r00,clk,q);
-  cache_byte_2 : cache_byte port map(d,w01,r01,clk,q);
-  cache_byte_3 : cache_byte port map(d,w10,r10,clk,q);
-  cache_byte_4 : cache_byte port map(d,w11,r11,clk,q);
+  cache_byte_0 : cache_byte port map(d,we(0),re(0),q);
+  cache_byte_1 : cache_byte port map(d,we(1),re(1),q);
+  cache_byte_2 : cache_byte port map(d,we(2),re(2),q);
+  cache_byte_3 : cache_byte port map(d,we(3),re(3),q);
 end structural;

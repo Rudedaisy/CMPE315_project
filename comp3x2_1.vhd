@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity comp3x2_1 is
   port(input1 : in  std_logic_vector(2 downto 0);
@@ -28,7 +28,7 @@ architecture structural of comp3x2_1 is
          output : out std_logic);
   end component;
 
-  for xor2_1_1, xor2_1_2, xor2_1_3 : xor2_1 use entity work.xor3_1(structural);
+  for xor2_1_1, xor2_1_2, xor2_1_3 : xor2_1 use entity work.xor2_1(structural);
   for nor3_1_1 : nor3_1 use entity work.nor3_1(structural);
 
   signal t1, t2, t3: std_logic;

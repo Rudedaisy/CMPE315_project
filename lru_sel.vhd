@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity lru_sel is
   port(FM        : in  std_logic;
@@ -43,6 +43,6 @@ begin
   nand2_1_3 : nand2_1 port map(not_FM, TMAVR, t3);
   nand2_1_4 : nand2_1 port map(FM, LRU, t4);
 
-  nand2_1_1 : nand2_1 port map(tm1, tm2, OUT_LEFT);
-  nand2_1_1 : nand2_1 port map(tm3, tm4, OUT_RIGHT);
+  nand2_1_5 : nand2_1 port map(t1, t2, OUT_LEFT);
+  nand2_1_6 : nand2_1 port map(t3, t4, OUT_RIGHT);
 end structural;

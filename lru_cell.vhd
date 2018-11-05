@@ -7,20 +7,22 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity lru_cell is
   port(TMAVL : in  std_logic;
        TMAVR : in  std_logic;
-       en    : in  std_logic;
+       updt  : in  std_logic;
        r     : in  std_logic;
+       rst   : in  std_logic;
        q     : out std_logic);
 end lru_cell;
 
 architecture structural of lru_cell is
-  component dff
+  component dff_reset
     port(d   : in  std_logic;
          clk : in  std_logic;
+         rst : in  std_logic;
          q   : out std_logic;
          qbar: out std_logic);
   end component;
@@ -45,22 +47,22 @@ architecture structural of lru_cell is
          output : out std_logic);
   end component;
 
-  for dff_1 : dff use entity work.dff(structural);
+  for dff_reset_1 : dff_reset use entity work.dff_reset(structural);
   for inv_1, inv_2 : inv use entity work.inv(structural);
   for nand2_1_1 : nand2_1 use entity work.nand2_1(structural);
   for or2_1_1 : or2_1 use entity work.or2_1(structural);
   for tx_1 : tx use entity work.tx(structural);
 
-  signal not_tmavr, not_r, t1, t2, t3 : std_logic;
+  signal not_tmavl, not_r, t1, t2, t3, qbar : std_logic;
 
 begin
-  inv_1     : inv     port map(TMAVR, not_tmavr);
-  inv_2     : inv     port map(r, not_r);
+  inv_1       : inv       port map(TMAVL, not_tmavl);
+  inv_2       : inv       port map(r, not_r);
 
-  dff_1     : dff     port map(t3, en, en, t1);
+  dff_reset_1 : dff_reset port map(t3, updt, rst, t1, qbar);
 
-  or2_1_1   : or2_1   port map(TMAVL, t1, t2);
-  nand2_1_1 : nand2_1 port map(not_tmavr, t2, t3);
+  or2_1_1     : or2_1     port map(TMAVR, t1, t2);
+  nand2_1_1   : nand2_1   port map(not_tmavl, t2, t3);
 
-  tx_1      : tx      port map(r, not_r, t1, q);
+  tx_1        : tx        port map(r, not_r, t1, q);
 end structural;

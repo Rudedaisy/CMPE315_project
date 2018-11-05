@@ -7,7 +7,7 @@
 
 library std;
 library ieee;
-use ieee.std_logic_11644.all;
+use ieee.std_logic_1164.all;
 
 entity register_cell is
   port(d   : in  std_logic;
@@ -32,9 +32,9 @@ architecture structural of register_cell is
   for dff_1    : dff    use entity work.dff(structural);
   for and2_1_1 : and2_1 use entity work.and2_1(structural);
 
-  signal temp1, trash : std_logic;
+  signal temp1  : std_logic;
 
 begin
   and2_1_1 : and2_1 port map(clk, w, temp1);
-  dff_1    : dff    port map(d, temp1, q, trash);
+  dff_1    : dff    port map(d, temp1, q, open);
 end structural;
