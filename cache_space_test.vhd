@@ -30,5 +30,27 @@ architecture test of cache_space_test is
 
   for cache_space_1 : cache_space use entity work.cache_space(structural);
   signal ADDRESS, IN_DATA, OUT_DATA : std_logic_vector(7 downto 0);
-  signal RESET, WRITE_EN, READ_EN, FM, UPDATE, TMAVL, TMAVR : std_logic;
-  
+  signal clock, RESET, WRITE_EN, READ_EN, FM, UPDATE, TMAVL, TMAVR : std_logic;
+
+begin
+
+  cache_space_1 : cache_space port map(ADDRESS, IN_DATA, WRITE_EN, READ_EN, FM, UPDATE, RESET, TMAVL, TMAVR, OUT_DATA);
+
+  clk : process
+  begin
+    clock <= '0','1' after 5ns
+             wait for 10 ns;
+  end process clk;
+
+  io_process : process
+    file infile  : text is in  "cache_space_test_in.txt";
+    file outfile : text is out "cache_space_test_out.txt";
+    variable adr, indata, outdata : std_logic_vector(7 downto 0);
+    variable wr,rd,frommem,upd,rst,tvl,tvr : std_logic;
+    variable buf : line;
+  begin
+    while not (endfile(infile)) loop
+
+    end loop;
+  end process io_process;
+end test;
