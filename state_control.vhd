@@ -64,8 +64,13 @@ component nand3_1
 		output   : out std_logic);
 end component;
 
+<<<<<<< HEAD
+for wire_1, wire_2: wire use entity work.wire(structural);
+for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
+=======
 for wire_1: wire use entity work.wire(structural);
 for inv_1, inv_2: inv use entity work.inv(structural);
+>>>>>>> 90058a030d5b4b9e5c7ded2c4bbb4eefe1a42dc3
 for or2_1_1: or2_1 use entity work.or2_1(structural);
 for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4: nand2_1 use entity work.nand2_1(structural);
 --for nand3_1_1: nand3_1 use entity work.nand3_1(structural);
@@ -91,5 +96,14 @@ begin
 	
 	-- Update LRU
 	inv_2: inv port map (is_s3, not_s3);
+<<<<<<< HEAD
+	inv_3: inv port map (is_s4, not_s4);
+	nand2_1_5: nand2_1 port map (count0, is_s1, temp_update);
+	nand3_1_1: nand3_1 port map (not_s3, not_s4, temp_update, update_lru);
+	
+	-- Memory Enable
+	wire_2: wire port map (is_s4, mem_en);
+=======
+>>>>>>> 90058a030d5b4b9e5c7ded2c4bbb4eefe1a42dc3
 	
 end structural;
