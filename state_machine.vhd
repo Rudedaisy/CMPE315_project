@@ -103,7 +103,7 @@ for counter4_1: counter4 use entity work.counter4(structural);
 for state_transition_1: state_transition use entity work.state_transition(structural);
 for state_control_1: state_control use entity work.state_control(structural);
 
-signal s_next: std_logic(2 downto 0);	
+signal s_next: std_logic_vector(2 downto 0);	
 signal count: std_logic_vector(3 downto 0);
 signal states: std_logic_vector(5 downto 0);
 signal not_clk, rst: std_logic;
