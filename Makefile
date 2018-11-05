@@ -39,3 +39,10 @@ decd3:
 	make compile_decd3
 	make elaborate_decd3
 	make simulate_decd3
+
+compall:
+	../../Cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var -smartorder *.vhd
+elaball:
+	../../Cadence/run_ncelab.bash -messages -access rwc -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var cache_space.vhd
+gui:
+	../../Cadence/run_ncsim.bash -gui -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var cache_space.vhd
