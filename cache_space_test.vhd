@@ -38,7 +38,7 @@ begin
 
   clk : process
   begin
-    clock <= '0','1' after 5ns
+    clock <= '0','1' after 5ns;
              wait for 10 ns;
   end process clk;
 
@@ -46,11 +46,47 @@ begin
     file infile  : text is in  "cache_space_test_in.txt";
     file outfile : text is out "cache_space_test_out.txt";
     variable adr, indata, outdata : std_logic_vector(7 downto 0);
+    
     variable wr,rd,frommem,upd,rst,tvl,tvr : std_logic;
     variable buf : line;
+
+--
+-- FILE STRUCTURE --
+-- OP       -- operation name
+-- CLKS     -- clock cycles this should take    
+-- xxxxxxxx -- ADDRESS
+-- xxxxxxxx -- DATA
+-- xxxxx    -- WE, RE, FM, UPD, RST,    
+-- .....    -- repeat for case
+-- ........ -- repeat for next operation
+--    
+
   begin
     while not (endfile(infile)) loop
+      readline(infile,buf);
+      read(buf,adr);
+      ADDRESS <= adr;
+      readline(infile,buf);
+      read(buf,indata);
+      IN_DATA <= indata;
+      readline(infile,buf);
+      read(buf,wr);
+      WRITE_EN <= wr;
+      readline(infile,buf);
+      read(buf,rd);
+      READ_EN <= rd;
+      readline(infile,buf);
+      read(buf,frommem);
+      FM <= frommem;
+      readline(infile,buf);
+      read(buf,upd);
+      UPDATE <= upd;
+      readline(infile,buf);
+      read(buf,rst);
+      RESET <= rst;
 
+      wait until falling_edge(clock);
+           
     end loop;
   end process io_process;
 end test;

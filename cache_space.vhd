@@ -60,8 +60,7 @@ architecture structural of cache_space is
        OUT_VBIT  : out std_logic);
   end component;
   component lru
-  port(TMAVL      : in  std_logic;
-       TMAVR      : in  std_logic;
+  port(TMAVR      : in  std_logic;
        BLOCK_SEL  : in  std_logic_vector(7 downto 0);
        UPDATE_LRU : in  std_logic;
        FM         : in  std_logic;
@@ -111,7 +110,7 @@ begin
   high_vbit : high port map(h_v);
   decd3_8_1 : decd3_8 port map(ADDRESS(2), ADDRESS(3), ADDRESS(4), sel(0), sel(1), sel(2), sel(3), sel(4), sel(5), sel(6), sel(7));
 
-  lru_1 : lru port map(tvl, tvr, sel, UPDATE, FM, RESET, lru_bit);
+  lru_1 : lru port map(tvr, sel, UPDATE, FM, RESET, lru_bit);
   lru_sel_1: lru_sel port map(FM, lru_bit, tvl, tvr, en_l, en_r);
   
   vbit_left  : vbit port map(h_v, sel, en_l, FM, RESET, v_l);
