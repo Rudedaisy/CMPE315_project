@@ -42,13 +42,6 @@ component inv
 		output   : out std_logic);
 end component;
 
-component or2_1
-	port (
-		input1   : in  std_logic;
-		input2   : in  std_logic;
-		output   : out std_logic);
-end component;
-
 component nand2_1
 	port (
 		input1   : in  std_logic;
@@ -56,19 +49,10 @@ component nand2_1
 		output   : out std_logic);
 end component;
 
-component nand3_1
-	port (
-		input1   : in  std_logic;
-		input2   : in  std_logic;
-		input3   : in  std_logic;
-		output   : out std_logic);
-end component;
-
-for wire_1, wire_2: wire use entity work.wire(structural);
-for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
-for or2_1_1: or2_1 use entity work.or2_1(structural);
-for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5: nand2_1 use entity work.nand2_1(structural);
-for nand3_1_1: nand3_1 use entity work.nand3_1(structural);
+for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
+for inv_1, inv_2: inv use entity work.inv(structural);
+for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6: nand2_1 use entity work.nand2_1(structural);
+--for nand3_1_1: nand3_1 use entity work.nand3_1(structural);
 
 signal not_s1, not_s3, not_s4, temp_busy, temp_wc, temp_update: std_logic;
 
@@ -87,15 +71,14 @@ begin
 	nand2_1_4: nand2_1 port map (not_s1, temp_wc, wr_cache);
 	
 	-- From Memory
-	or2_1_1: or2_1 port map (is_s4, is_s5, fm);
+	wire_2: wire port map (is_s5, fm);
 	
 	-- Update LRU
 	inv_2: inv port map (is_s3, not_s3);
-	inv_3: inv port map (is_s4, not_s4);
 	nand2_1_5: nand2_1 port map (count0, is_s1, temp_update);
-	nand3_1_1: nand3_1 port map (not_s3, not_s4, temp_update, update_lru);
+	nand2_1_6: nand2_1 port map (not_s3, temp_update, update_lru);
 	
 	-- Memory Enable
-	wire_2: wire port map (is_s4, mem_en);
+	wire_3: wire port map (is_s4, mem_en);
 	
 end structural;
