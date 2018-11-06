@@ -13,7 +13,7 @@ entity mux2_1 is
 	port (
 		input1	 : in  std_logic;
 		input2	 : in  std_logic;
-		sel	 : in  std_logic;
+		sel		 : in  std_logic;
 		output   : out std_logic);
 end mux2_1;
 
