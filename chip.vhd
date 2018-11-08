@@ -18,7 +18,7 @@ entity chip is
       clk        : in  std_logic;
       reset      : in  std_logic;
       mem_data   : in  std_logic_vector(7 downto 0);
-      Vdd	 : in  std_logic;
+      Vdd	 	 : in  std_logic;
       Gnd        : in  std_logic;
       busy       : out std_logic;
       mem_en     : out std_logic;
@@ -75,4 +75,58 @@ architecture structural of chip is
          fm	 : in  std_logic;
          address : out std_logic_vector(1 downto 0));
   end component;
+  component wire
+	port (
+		 input   : in  std_logic;
+		 output  : out std_logic);
+  end component;
+  
+  for registers_1: registers use entity work.registers(structural);
+  for cache_space_1: cache_space use entity work.cache_space(structural);
+  for state_machine_1: state_machine use entity work.state_machine(structural);
+  for data_muxed_1: data_muxed use entity work.data_muxed(structural);
+  for a1_0_muxed_1: a1_0_muxed use entity work.a1_0_muxed(structural);
+  for wire_1, wire_2, wire_3, wire_4, wire_5, wire_6, wire_7, wire_8: wire use entity work.wire(structural);
+  
+  signal R_W, TMAVL, TMAVR, rd_cache, wr_cache, fm, update_lru, a0_new, a1_new : std_logic;
+  signal ADDRESS, DATA, DATA_MUXED : std_logic_vector(7 downto 0);
+  signal ADDRESS_MUXED : std_logic_vector(1 downto 0);
+  
+begin
+  
+  -- Address, data, and rd_wr registers
+  registers_1: registers port map (cpu_add, cpu_data, cpu_rd_wrn, start, clk, ADDRESS, DATA, R_W);
+  
+  -- State machine
+  state_machine_1: state_machine port map (start, R_W, TMAVL, TMAVR, clk, busy, rd_cache, wr_cache, fm, update_lru, mem_en, a0_new, a1_new);
+
+  -- Cache space [out_data is tied to inout cpu_data bus]
+  cache_space_1: cache_space port map (	ADDRESS(7 downto 2) => ADDRESS(7 downto 2), 
+										ADDRESS(1 downto 0) => ADDRESS_MUXED, 
+										IN_DATA => DATA_MUXED, 
+										WRITE_EN => wr_cache, 
+										READ_EN => rd_cache, 
+										FM => fm, 
+										UPDATE => update_lru, 
+										RESET => reset, 
+										TMAVL => TMAVL, 
+										TMAVR => TMAVR, 
+										OUT_DATA => cpu_data);
+  
+  -- MUX data between CPU and memory
+  data_muxed_1: data_muxed port map (DATA, mem_data, fm, DATA_MUXED);
+  
+  -- MUX address bits 1 and 0 
+  a1_0_muxed_1: a1_0_muxed port map (a_orig => ADDRESS(1 downto 0), a_alt(1) => a1_new, a_alt(0) => a0_new, address => ADDRESS_MUXED);
+  
+  -- Connect to memory
+  wire_1: wire port map (ADDRESS(7), mem_add(7));
+  wire_2: wire port map (ADDRESS(6), mem_add(6));
+  wire_3: wire port map (ADDRESS(5), mem_add(5));
+  wire_4: wire port map (ADDRESS(4), mem_add(4));
+  wire_5: wire port map (ADDRESS(3), mem_add(3));
+  wire_6: wire port map (ADDRESS(2), mem_add(2));
+  wire_7: wire port map (ADDRESS_MUXED(1), mem_add(1));
+  wire_8: wire port map (ADDRESS_MUXED(0), mem_add(0));
+  
 end structural;
