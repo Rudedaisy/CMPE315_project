@@ -89,8 +89,8 @@ architecture structural of chip is
   for wire_1, wire_2, wire_3, wire_4, wire_5, wire_6, wire_7, wire_8: wire use entity work.wire(structural);
   
   signal R_W, TMAVL, TMAVR, rd_cache, wr_cache, fm, update_lru, a0_new, a1_new : std_logic;
-  signal ADDRESS, DATA, DATA_MUXED : std_logic_vector(7 downto 0);
-  signal ADDRESS_MUXED : std_logic_vector(1 downto 0);
+  signal ADDRESS, DATA, MUXED_DATA : std_logic_vector(7 downto 0);
+  signal MUXED_ADDRESS : std_logic_vector(1 downto 0);
   
 begin
   
@@ -102,8 +102,8 @@ begin
 
   -- Cache space [out_data is tied to inout cpu_data bus]
   cache_space_1: cache_space port map (	ADDRESS(7 downto 2) => ADDRESS(7 downto 2), 
-										ADDRESS(1 downto 0) => ADDRESS_MUXED, 
-										IN_DATA => DATA_MUXED, 
+										ADDRESS(1 downto 0) => MUXED_ADDRESS, 
+										IN_DATA => MUXED_DATA, 
 										WRITE_EN => wr_cache, 
 										READ_EN => rd_cache, 
 										FM => fm, 
@@ -114,10 +114,10 @@ begin
 										OUT_DATA => cpu_data);
   
   -- MUX data between CPU and memory
-  data_muxed_1: data_muxed port map (DATA, mem_data, fm, DATA_MUXED);
+  data_muxed_1: data_muxed port map (DATA, mem_data, fm, MUXED_DATA);
   
   -- MUX address bits 1 and 0 
-  a1_0_muxed_1: a1_0_muxed port map (a_orig => ADDRESS(1 downto 0), a_alt(1) => a1_new, a_alt(0) => a0_new, address => ADDRESS_MUXED);
+  a1_0_muxed_1: a1_0_muxed port map (a_orig => ADDRESS(1 downto 0), a_alt(1) => a1_new, a_alt(0) => a0_new, fm => fm, address => MUXED_ADDRESS);
   
   -- Connect to memory
   wire_1: wire port map (ADDRESS(7), mem_add(7));
@@ -126,7 +126,7 @@ begin
   wire_4: wire port map (ADDRESS(4), mem_add(4));
   wire_5: wire port map (ADDRESS(3), mem_add(3));
   wire_6: wire port map (ADDRESS(2), mem_add(2));
-  wire_7: wire port map (ADDRESS_MUXED(1), mem_add(1));
-  wire_8: wire port map (ADDRESS_MUXED(0), mem_add(0));
+  wire_7: wire port map (MUXED_ADDRESS(1), mem_add(1));
+  wire_8: wire port map (MUXED_ADDRESS(0), mem_add(0));
   
 end structural;

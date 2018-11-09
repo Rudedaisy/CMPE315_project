@@ -45,13 +45,13 @@ for dff_1, dff_2, dff_3: dff use entity work.dff(structural);
 for decd3_8_1: decd3_8 use entity work.decd3_8(structural);
 
 signal q0, q1, q2: std_logic;
-signal notq0, notq1, notq2, out6, out7: std_logic;
+signal out6, out7: std_logic;
 
 begin
 	
-	dff_1: dff port map (s_next(2), not_clk, q2, notq2);
-	dff_2: dff port map (s_next(1), not_clk, q1, notq1);
-	dff_3: dff port map (s_next(0), not_clk, q0, notq0);
+	dff_1: dff port map (s_next(2), not_clk, q2, open);
+	dff_2: dff port map (s_next(1), not_clk, q1, open);
+	dff_3: dff port map (s_next(0), not_clk, q0, open);
 	
 	decd3_8_1: decd3_8 port map (q0, q1, q2, s_curr(0), s_curr(1), s_curr(2), s_curr(3), s_curr(4), s_curr(5), out6, out7);
 

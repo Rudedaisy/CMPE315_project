@@ -19,6 +19,7 @@ entity state_control is
 		is_s5	 : in  std_logic;
 		count0	 : in  std_logic;
 		count3	 : in  std_logic;
+		clk 	 : in  std_logic;
 		not_clk	 : in  std_logic;
 		busy   	 : out std_logic;
 		rd_cache : out std_logic;
@@ -49,34 +50,42 @@ component nand2_1
 		output   : out std_logic);
 end component;
 
-for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
-for inv_1, inv_2: inv use entity work.inv(structural);
-for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6: nand2_1 use entity work.nand2_1(structural);
---for nand3_1_1: nand3_1 use entity work.nand3_1(structural);
+component dff
+  port(d    : in  std_logic;
+       clk  : in  std_logic;
+       q    : out std_logic;
+       qbar : out std_logic);
+end component;
 
-signal not_s1, not_s3, not_s4, temp_busy, temp_wc, temp_update: std_logic;
+for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
+for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
+for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5: nand2_1 use entity work.nand2_1(structural);
+for dff_1: dff use entity work.dff(structural);
+
+signal not_start, not_s1, not_s3, not_s4, temp_busy, temp_wc, temp_update: std_logic;
 
 begin
 	
 	-- Busy
-	nand2_1_1: nand2_1 port map (start, not_clk, temp_busy);
-	nand2_1_2: nand2_1 port map (temp_busy, is_s0, busy);
+	inv_1: inv port map (start, not_start);
+	nand2_1_1: nand2_1 port map (not_start, is_s0, temp_busy);
+	dff_1: dff port map (temp_busy, clk, busy, open);
 	
 	-- Read Cache
 	wire_1: wire port map (is_s3, rd_cache);
 	
 	-- Write Cache
-	inv_1: inv port map (is_s1, not_s1);
-	nand2_1_3: nand2_1 port map (count0, count3, temp_wc);
-	nand2_1_4: nand2_1 port map (not_s1, temp_wc, wr_cache);
+	inv_2: inv port map (is_s1, not_s1);
+	nand2_1_2: nand2_1 port map (count0, count3, temp_wc);
+	nand2_1_3: nand2_1 port map (not_s1, temp_wc, wr_cache);
 	
 	-- From Memory
 	wire_2: wire port map (is_s5, fm);
 	
 	-- Update LRU
-	inv_2: inv port map (is_s3, not_s3);
-	nand2_1_5: nand2_1 port map (count0, is_s1, temp_update);
-	nand2_1_6: nand2_1 port map (not_s3, temp_update, update_lru);
+	inv_3: inv port map (is_s3, not_s3);
+	nand2_1_4: nand2_1 port map (count0, is_s1, temp_update);
+	nand2_1_5: nand2_1 port map (not_s3, temp_update, update_lru);
 	
 	-- Memory Enable
 	wire_3: wire port map (is_s4, mem_en);

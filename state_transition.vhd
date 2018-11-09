@@ -11,7 +11,7 @@ use IEEE.std_logic_1164.all;
 entity state_transition is
 
 	port (
-		start	 : in  std_logic;
+		busy	 : in  std_logic;
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
@@ -28,7 +28,7 @@ architecture structural of state_transition is
 
 component s0_transition
 	port (
-		start	 : in  std_logic;
+		busy	 : in  std_logic;
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
@@ -91,7 +91,7 @@ signal not_count1: std_logic;
 begin
 	
 	-- s0 next
-	s0_transition_1: s0_transition port map (start, rd_wr, tmavl, tmavr, s0_next);
+	s0_transition_1: s0_transition port map (busy, rd_wr, tmavl, tmavr, s0_next);
 	nand2_1_1: nand2_1 port map (s0_next(2), is_s0, next2_0);
 	nand2_1_2: nand2_1 port map (s0_next(1), is_s0, next1_0);
 	nand2_1_3: nand2_1 port map (s0_next(0), is_s0, next0_0);

@@ -63,7 +63,7 @@ end component;
 
 component state_transition
 	port (
-		start	 : in  std_logic;
+		busy	 : in  std_logic;
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
@@ -86,6 +86,7 @@ component state_control
 		is_s5	 : in  std_logic;
 		count0	 : in  std_logic;
 		count3	 : in  std_logic;
+		clk 	 : in  std_logic;
 		not_clk	 : in  std_logic;
 		busy   	 : out std_logic;
 		rd_cache : out std_logic;
@@ -95,7 +96,7 @@ component state_control
 		mem_en   : out std_logic);
 end component;
 
-for wire_1, wire_2: wire use entity work.wire(structural);
+for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
 for inv_1: inv use entity work.inv(structural);
 for or2_1_1: or2_1 use entity work.or2_1(structural);
 for curr_state_1: curr_state use entity work.curr_state(structural);
@@ -106,7 +107,7 @@ for state_control_1: state_control use entity work.state_control(structural);
 signal s_next: std_logic_vector(2 downto 0);	
 signal count: std_logic_vector(3 downto 0);
 signal states: std_logic_vector(5 downto 0);
-signal not_clk, rst: std_logic;
+signal not_clk, rst, busy_out: std_logic;
 
 begin
 	
@@ -127,9 +128,10 @@ begin
 	counter4_1: counter4 port map (clk, rst, count);
 	
 	-- Generate next state combinatorially
-	state_transition_1: state_transition port map (start, rd_wr, tmavl, tmavr, count, states(0), states(1), states(2), states(4), states(5), s_next);
+	state_transition_1: state_transition port map (busy_out, rd_wr, tmavl, tmavr, count, states(0), states(1), states(2), states(4), states(5), s_next);
 	
 	-- Generate control signal outputs
-	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), count(0), count(3), not_clk, busy, rd_cache, wr_cache, fm, update_lru, mem_en);
+	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), count(0), count(3), clk, not_clk, busy_out, rd_cache, wr_cache, fm, update_lru, mem_en);
+	wire_3: wire port map (busy_out, busy);
 	
 end structural;
