@@ -12,6 +12,7 @@ entity state_machine is
 
 	port (
 		start	 : in  std_logic;
+		rst		 : in  std_logic;
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
@@ -50,6 +51,7 @@ end component;
 component curr_state
 	port (
 		s_next	 : in  std_logic_vector(2 downto 0);
+		rst		 : in  std_logic;
 		not_clk	 : in  std_logic;
 		s_curr   : out std_logic_vector(5 downto 0));
 end component;
@@ -107,25 +109,25 @@ for state_control_1: state_control use entity work.state_control(structural);
 signal s_next: std_logic_vector(2 downto 0);	
 signal count: std_logic_vector(3 downto 0);
 signal states: std_logic_vector(5 downto 0);
-signal not_clk, rst, busy_out: std_logic;
+signal not_clk, count_rst, busy_out: std_logic;
 
 begin
 	
 	-- Output new address bits 1 and 0
 	wire_1: wire port map (count(1), a0_new);
-	wire_2: wire port map (count(2), a0_new);
+	wire_2: wire port map (count(2), a1_new);
 	
 	-- Invert clk signal
 	inv_1: inv port map (clk, not_clk);
 	
 	-- Generate count reset signal
-	or2_1_1: or2_1 port map (states(0), states(4), rst);
+	or2_1_1: or2_1 port map (states(0), states(4), count_rst);
 	
 	-- Generate current decoded current state signal on the RISING EDGE
-	curr_state_1: curr_state port map (s_next, not_clk, states);
+	curr_state_1: curr_state port map (s_next, rst, not_clk, states);
 	
 	-- Generate internal count every FALLING EDGE
-	counter4_1: counter4 port map (clk, rst, count);
+	counter4_1: counter4 port map (clk, count_rst, count);
 	
 	-- Generate next state combinatorially
 	state_transition_1: state_transition port map (busy_out, rd_wr, tmavl, tmavr, count, states(0), states(1), states(2), states(4), states(5), s_next);

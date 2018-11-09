@@ -1,5 +1,5 @@
-compile_test1: s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd a1_0_muxed.vhd cache.vhd cache_block.vhd cache_byte.vhd cache_cell.vhd cache_space.vhd chip.vhd comp3x2_1.vhd data_muxed.vhd dlatch.vhd dlatch_reset.vhd dmx2_4.vhd high.vhd lru.vhd lru_cell.vhd lru_sel.vhd register_byte.vhd register_cell.vhd registers.vhd tag.vhd tag_block.vhd tx.vhd vbit.vhd xor2_1.vhd xor3_1.vhd mux2_1.vhd cache_cell_reset.vhd chip_test.vhd
-	../cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var -smartorder s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd a1_0_muxed.vhd cache.vhd cache_block.vhd cache_byte.vhd cache_cell.vhd cache_space.vhd chip.vhd comp3x2_1.vhd data_muxed.vhd dlatch.vhd dlatch_reset.vhd dmx2_4.vhd high.vhd lru.vhd lru_cell.vhd lru_sel.vhd register_byte.vhd register_cell.vhd registers.vhd tag.vhd tag_block.vhd tx.vhd vbit.vhd xor2_1.vhd xor3_1.vhd mux2_1.vhd cache_cell_reset.vhd chip_test.vhd
+compile_test1: s0_transition.vhd state_transition.vhd inv.vhd nor2_1.vhd nor4_1.vhd and2_1.vhd and3_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd a1_0_muxed.vhd cache.vhd cache_block.vhd cache_byte.vhd cache_cell.vhd cache_space.vhd chip.vhd comp3x2_1.vhd data_muxed.vhd dlatch.vhd dlatch_reset.vhd dmx2_4.vhd high.vhd lru.vhd lru_cell.vhd lru_sel.vhd register_byte.vhd register_cell.vhd registers.vhd tag.vhd tag_block.vhd tx.vhd vbit.vhd xor2_1.vhd xor3_1.vhd mux2_1.vhd cache_cell_reset.vhd chip_test.vhd
+	../cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var -smartorder s0_transition.vhd state_transition.vhd inv.vhd nor2_1.vhd nor4_1.vhd and2_1.vhd and3_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd a1_0_muxed.vhd cache.vhd cache_block.vhd cache_byte.vhd cache_cell.vhd cache_space.vhd chip.vhd comp3x2_1.vhd data_muxed.vhd dlatch.vhd dlatch_reset.vhd dmx2_4.vhd high.vhd lru.vhd lru_cell.vhd lru_sel.vhd register_byte.vhd register_cell.vhd registers.vhd tag.vhd tag_block.vhd tx.vhd vbit.vhd xor2_1.vhd xor3_1.vhd mux2_1.vhd cache_cell_reset.vhd chip_test.vhd
 
 elaborate_test1:
 	../cadence/run_ncelab.bash -messages -access rwc -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var chip_test
@@ -54,19 +54,19 @@ decd3:
 	make elaborate_decd3
 	make simulate_decd3
 	
-compile_state_machine: s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd
-	../cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var -smartorder s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd
+compile_state_machine: s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd state_machine_test.vhd
+	../cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var -smartorder s0_transition.vhd state_transition.vhd inv.vhd nor4_1.vhd and4_1.vhd nand2_1.vhd nand3_1.vhd nand4_1.vhd dff.vhd dff_reset.vhd counter4.vhd wire.vhd nor3_1.vhd decd3_8.vhd curr_state.vhd state_control.vhd state_machine.vhd state_machine_test.vhd
 	
-#elaborate_state_machine:
-#	../cadence/run_ncelab.bash -messages -access rwc -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var state_transition_test
+elaborate_state_machine:
+	../cadence/run_ncelab.bash -messages -access rwc -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var state_machine_test
 	
-#simulate_state_machine:
-#	../cadence/run_ncsim.bash -input ncsim.run -messages -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var state_transition_test
+simulate_state_machine:
+	../cadence/run_ncsim.bash -input ncsim.run -messages -cdslib ../cadence/cds.lib -hdlvar ../cadence/hdl.var state_machine_test
 	
-#state_machine:
-#	make compile_state_machine
-#	make elaborate_state_machine
-#	make simulate_state_machine
+state_machine:
+	make compile_state_machine
+	make elaborate_state_machine
+	make simulate_state_machine
 
 compall:
 	../../Cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var -smartorder *.vhd

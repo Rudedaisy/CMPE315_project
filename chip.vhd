@@ -50,6 +50,7 @@ architecture structural of chip is
   end component;
   component state_machine
     port(start	     : in  std_logic;
+		 rst		 : in  std_logic;
          rd_wr	     : in  std_logic;
          tmavl	     : in  std_logic;
          tmavr	     : in  std_logic;
@@ -98,7 +99,7 @@ begin
   registers_1: registers port map (cpu_add, cpu_data, cpu_rd_wrn, start, clk, ADDRESS, DATA, R_W);
   
   -- State machine
-  state_machine_1: state_machine port map (start, R_W, TMAVL, TMAVR, clk, busy, rd_cache, wr_cache, fm, update_lru, mem_en, a0_new, a1_new);
+  state_machine_1: state_machine port map (start, reset, R_W, TMAVL, TMAVR, clk, busy, rd_cache, wr_cache, fm, update_lru, mem_en, a0_new, a1_new);
 
   -- Cache space [out_data is tied to inout cpu_data bus]
   cache_space_1: cache_space port map (	ADDRESS(7 downto 2) => ADDRESS(7 downto 2), 
