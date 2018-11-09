@@ -1,3 +1,4 @@
+
 --
 -- Entity: vbit
 -- Architecture: structural
@@ -63,11 +64,11 @@ begin
   and3_1_7 : and3_1 port map(BLOCK_SEL(7), CACHE_EN, WRITE_V, w(7));
 
   cache_cell_reset_0 : cache_cell_reset port map(IN_VBIT, w(0), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_1 : cache_cell_reset port map(IN_VBIT, w(1), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_2 : cache_cell_reset port map(IN_VBIT, w(2), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_3 : cache_cell_reset port map(IN_VBIT, w(3), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_4 : cache_cell_reset port map(IN_VBIT, w(4), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_5 : cache_cell_reset port map(IN_VBIT, w(5), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_6 : cache_cell_reset port map(IN_VBIT, w(6), BLOCK_SEL(0), RESET, OUT_VBIT);
-  cache_cell_reset_7 : cache_cell_reset port map(IN_VBIT, w(7), BLOCK_SEL(0), RESET, OUT_VBIT);
+  cache_cell_reset_1 : cache_cell_reset port map(IN_VBIT, w(1), BLOCK_SEL(1), RESET, OUT_VBIT);
+  cache_cell_reset_2 : cache_cell_reset port map(IN_VBIT, w(2), BLOCK_SEL(2), RESET, OUT_VBIT);
+  cache_cell_reset_3 : cache_cell_reset port map(IN_VBIT, w(3), BLOCK_SEL(3), RESET, OUT_VBIT);
+  cache_cell_reset_4 : cache_cell_reset port map(IN_VBIT, w(4), BLOCK_SEL(4), RESET, OUT_VBIT);
+  cache_cell_reset_5 : cache_cell_reset port map(IN_VBIT, w(5), BLOCK_SEL(5), RESET, OUT_VBIT);
+  cache_cell_reset_6 : cache_cell_reset port map(IN_VBIT, w(6), BLOCK_SEL(6), RESET, OUT_VBIT);
+  cache_cell_reset_7 : cache_cell_reset port map(IN_VBIT, w(7), BLOCK_SEL(7), RESET, OUT_VBIT);
 end structural;
