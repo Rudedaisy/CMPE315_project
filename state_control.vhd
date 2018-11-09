@@ -65,11 +65,10 @@ component dff
        qbar : out std_logic);
 end component;
 
-for wire_1, wire_2: wire use entity work.wire(structural);
 for inv_1, inv_2: inv use entity work.inv(structural);
 for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5: nand2_1 use entity work.nand2_1(structural);
 for nand3_1_1: nand3_1 use entity work.nand3_1(structural);
-for dff_1, dff_2: dff use entity work.dff(structural);
+for dff_1, dff_2, dff_3, dff_4: dff use entity work.dff(structural);
 
 signal not_start, not_s3, not_s4, temp_busy, temp_wc_1, temp_wc_2, temp_update: std_logic;
 
@@ -81,7 +80,7 @@ begin
 	dff_1: dff port map (temp_busy, clk, busy, open);
 	
 	-- Read Cache
-	wire_1: wire port map (is_s3, rd_cache);
+	dff_2: dff port map (is_s3, clk, rd_cache, open);
 	
 	-- Write Cache
 	nand3_1_1: nand3_1 port map (count0, count3, not_clk, temp_wc_1);
@@ -89,7 +88,7 @@ begin
 	nand2_1_3: nand2_1 port map (temp_wc_1, temp_wc_2, wr_cache);
 	
 	-- From Memory
-	dff_2: dff port map (is_s5, clk, fm, open);
+	dff_3: dff port map (is_s5, clk, fm, open);
 	
 	-- Update LRU
 	inv_2: inv port map (is_s3, not_s3);
@@ -97,6 +96,6 @@ begin
 	nand2_1_5: nand2_1 port map (not_s3, temp_update, update_lru);
 	
 	-- Memory Enable
-	wire_2: wire port map (is_s4, mem_en);
+	dff_4: dff port map (is_s4, clk, mem_en, open);
 	
 end structural;
