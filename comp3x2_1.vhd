@@ -31,12 +31,12 @@ architecture structural of comp3x2_1 is
   for xor2_1_1, xor2_1_2, xor2_1_3 : xor2_1 use entity work.xor2_1(structural);
   for nor3_1_1 : nor3_1 use entity work.nor3_1(structural);
 
-  signal t1, t2, t3: std_logic;
+  signal t0, t1, t2: std_logic;
 
 begin
-  xor2_1_1 : xor2_1 port map(input1(0), input2(0), t1);
+  xor2_1_1 : xor2_1 port map(input1(0), input2(0), t0);
   xor2_1_2 : xor2_1 port map(input1(1), input2(1), t1);
   xor2_1_3 : xor2_1 port map(input1(2), input2(2), t2);
 
-  nor3_1_1 : nor3_1 port map(t1, t2, t3, output);
+  nor3_1_1 : nor3_1 port map(t0, t1, t2, output);
 end structural;
