@@ -11,18 +11,18 @@ use ieee.std_logic_1164.all;
 
 entity chip is
   port (
-      cpu_add    : in  std_logic_vector(7 downto 0);
-      cpu_data   : inout  std_logic_vector(7 downto 0);
-      cpu_rd_wrn : in  std_logic;    
-      start      : in  std_logic;
-      clk        : in  std_logic;
-      reset      : in  std_logic;
-      mem_data   : in  std_logic_vector(7 downto 0);
-      Vdd	 	 : in  std_logic;
-      Gnd        : in  std_logic;
-      busy       : out std_logic;
-      mem_en     : out std_logic;
-      mem_add    : out std_logic_vector(7 downto 0));
+      cpu_add    : in    std_logic_vector(7 downto 0);
+      cpu_data   : inout std_logic_vector(7 downto 0);
+      cpu_rd_wrn : in    std_logic;    
+      start      : in    std_logic;
+      clk        : in    std_logic;
+      reset      : in    std_logic;
+      mem_data   : in    std_logic_vector(7 downto 0);
+      Vdd	 : in    std_logic;
+      Gnd        : in    std_logic;
+      busy       : out   std_logic;
+      mem_en     : out   std_logic;
+      mem_add    : out   std_logic_vector(7 downto 0));
 end chip;
 
 architecture structural of chip is
@@ -103,16 +103,16 @@ begin
 
   -- Cache space [out_data is tied to inout cpu_data bus]
   cache_space_1: cache_space port map (	ADDRESS(7 downto 2) => ADDRESS(7 downto 2), 
-										ADDRESS(1 downto 0) => MUXED_ADDRESS, 
-										IN_DATA => MUXED_DATA, 
-										WRITE_EN => wr_cache, 
-										READ_EN => rd_cache, 
-										FM => fm, 
-										UPDATE => update_lru, 
-										RESET => reset, 
-										TMAVL => TMAVL, 
-										TMAVR => TMAVR, 
-										OUT_DATA => cpu_data);
+					ADDRESS(1 downto 0) => MUXED_ADDRESS, 
+					IN_DATA => MUXED_DATA, 
+					WRITE_EN => wr_cache, 
+					READ_EN => rd_cache, 
+					FM => fm, 
+					UPDATE => update_lru, 
+					RESET => reset, 
+					TMAVL => TMAVL, 
+					TMAVR => TMAVR, 
+					OUT_DATA => cpu_data);
   
   -- MUX data between CPU and memory
   data_muxed_1: data_muxed port map (DATA, mem_data, fm, MUXED_DATA);
