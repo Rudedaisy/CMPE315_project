@@ -48,6 +48,22 @@ component or2_1
 		output   : out std_logic);
 end component;
 
+component and4_1
+	port (
+		input1   : in  std_logic;
+		input2   : in  std_logic;
+		input3   : in  std_logic;
+		input4   : in  std_logic;
+		output   : out std_logic);
+end component;
+
+component dff
+  port(d    : in  std_logic;
+       clk  : in  std_logic;
+       q    : out std_logic;
+       qbar : out std_logic);
+end component;
+
 component curr_state
 	port (
 		s_next	 : in  std_logic_vector(2 downto 0);
@@ -86,6 +102,7 @@ component state_control
 		is_s3	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
+		leave_s5 : in  std_logic;
 		count0	 : in  std_logic;
 		count3	 : in  std_logic;
 		clk 	 : in  std_logic;
@@ -101,6 +118,8 @@ end component;
 for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
 for inv_1: inv use entity work.inv(structural);
 for or2_1_1: or2_1 use entity work.or2_1(structural);
+for and4_1_1: and4_1 use entity work.and4_1(structural);
+for dff_1: dff use entity work.dff(structural);
 for curr_state_1: curr_state use entity work.curr_state(structural);
 for counter4_1: counter4 use entity work.counter4(structural);
 for state_transition_1: state_transition use entity work.state_transition(structural);
@@ -109,7 +128,7 @@ for state_control_1: state_control use entity work.state_control(structural);
 signal s_next: std_logic_vector(2 downto 0);	
 signal count: std_logic_vector(3 downto 0);
 signal states: std_logic_vector(5 downto 0);
-signal not_clk, count_rst, busy_out: std_logic;
+signal not_clk, count_rst, busy_out, s5_done, leave_s5: std_logic;
 
 begin
 	
@@ -133,7 +152,9 @@ begin
 	state_transition_1: state_transition port map (busy_out, rd_wr, tmavl, tmavr, count, states(0), states(1), states(2), states(4), states(5), s_next);
 	
 	-- Generate control signal outputs
-	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), count(0), count(3), clk, not_clk, busy_out, rd_cache, wr_cache, fm, update_lru, mem_en);
+	and4_1_1: and4_1 port map (count(3), count(2), count(1), count(0), s5_done);
+	dff_1: dff port map (s5_done, clk, leave_s5);
+	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), leave_s5, count(0), count(3), clk, not_clk, busy_out, rd_cache, wr_cache, fm, update_lru, mem_en);
 	wire_3: wire port map (busy_out, busy);
 	
 end structural;
