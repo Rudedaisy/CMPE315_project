@@ -70,7 +70,9 @@ state_machine:
 
 compall:
 	../../Cadence/run_ncvhdl.bash -messages -linedebug -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var -smartorder *.vhd
-elaball:
-	../../Cadence/run_ncelab.bash -messages -access rwc -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var cache_space.vhd
+elab:
+	../../Cadence/run_ncelab.bash -messages -access rwc -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var chip_test
+sim:
+	../../Cadence/run_ncsim.bash -input run.ncsim -messages -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var chip_test
 gui:
-	../../Cadence/run_ncsim.bash -gui -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var cache_space.vhd
+	../../Cadence/run_ncsim.bash -gui -cdslib ../../Cadence/cds.lib -hdlvar ../../Cadence/hdl.var chip_test
