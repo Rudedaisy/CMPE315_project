@@ -17,6 +17,7 @@ entity state_control is
 		is_s3	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
+		leave_s5 : in  std_logic;
 		count0	 : in  std_logic;
 		count3	 : in  std_logic;
 		clk 	 : in  std_logic;
