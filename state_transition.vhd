@@ -14,13 +14,14 @@ entity state_transition is
 		busy	 : in  std_logic;
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
-		tmavr	 : in  std_logic;
-		count	 : in  std_logic_vector(3 downto 0);
+		tmavr	 : in  std_logic; 
+		count1	 : in  std_logic;
 		is_s0	 : in  std_logic;
 		is_s1	 : in  std_logic;
 		is_s2	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
+		leave_s5 : in  std_logic;
 		s_next   : out std_logic_vector(2 downto 0));
 end state_transition;
 
@@ -75,17 +76,16 @@ component nand4_1
 end component;
 
 for s0_transition_1: s0_transition use entity work.s0_transition(structural);
-for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
-for and4_1_1: and4_1 use entity work.and4_1(structural);
+for inv_1, inv_2, inv_3, inv_4: inv use entity work.inv(structural);
 for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6, nand2_1_7: nand2_1 use entity work.nand2_1(structural);
 for nand3_1_1, nand3_1_2: nand3_1 use entity work.nand3_1(structural);
-for nand4_1_1, nand4_1_2: nand4_1 use entity work.nand4_1(structural);
+for nand4_1_1: nand4_1 use entity work.nand4_1(structural);
 
-signal next2_0, next2_and_0_4, next2_5 : std_logic;	-- next2 temps
-signal next1_0, next1_2, next1_5 : std_logic;			-- next1 temps
-signal next0_0, next0_1, next0_5 : std_logic;			-- next0 temps
+signal next2_0, next2_and_0_4, next2_5 : std_logic;				-- next2 temps 
+signal next1_0, next1_2, next1_5 : std_logic;					-- next1 temps
+signal next0_0, next0_1, next0_5 : std_logic;					-- next0 temps
 signal s0_next : std_logic_vector(2 downto 0);					-- s0 next bits
-signal s5_next2, s5_next1 : std_logic;							-- s5 next bits
+signal s5_next2 : std_logic;									-- s5 next bits
 signal not_count1: std_logic;
 
 begin
@@ -97,7 +97,7 @@ begin
 	nand2_1_3: nand2_1 port map (s0_next(0), is_s0, next0_0);
 	
 	-- s1 next
-	inv_1: inv port map (count(1), not_count1);
+	inv_1: inv port map (count1, not_count1);
 	nand2_1_4: nand2_1 port map (is_s1, not_count1, next0_1);
 	
 	-- s2 next
@@ -107,15 +107,14 @@ begin
 	inv_2: inv port map (is_s4, next2_and_0_4);
 	
 	-- s5 next
-	nand4_1_1: nand4_1 port map (count(3), count(2), count(1), count(0), s5_next2);
-	and4_1_1: and4_1 port map (count(3), count(2), count(1), count(0), s5_next1);
+	inv_3: inv port map (leave_s5, s5_next2);
 	nand2_1_6: nand2_1 port map (is_s5, s5_next2, next2_5);
-	nand2_1_7: nand2_1 port map (is_s5, s5_next1, next1_5);
-	inv_3: inv port map (is_s5, next0_5);
+	nand2_1_7: nand2_1 port map (is_s5, leave_s5, next1_5);
+	inv_4: inv port map (is_s5, next0_5);
 	
 	-- final next bits
 	nand3_1_1: nand3_1 port map (next2_0, next2_and_0_4, next2_5, s_next(2));
 	nand3_1_2: nand3_1 port map (next1_0, next1_2, next1_5, s_next(1));
-	nand4_1_2: nand4_1 port map (next0_0, next0_1, next2_and_0_4, next0_5, s_next(0));
+	nand4_1_1: nand4_1 port map (next0_0, next0_1, next2_and_0_4, next0_5, s_next(0));
 
 end structural;

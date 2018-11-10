@@ -85,12 +85,13 @@ component state_transition
 		rd_wr	 : in  std_logic;
 		tmavl	 : in  std_logic;
 		tmavr	 : in  std_logic;
-		count	 : in  std_logic_vector(3 downto 0);
+		count1	 : in  std_logic;
 		is_s0	 : in  std_logic;
 		is_s1	 : in  std_logic;
 		is_s2	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
+		leave_s5 : in  std_logic;
 		s_next   : out std_logic_vector(2 downto 0));
 end component;
 
@@ -102,7 +103,6 @@ component state_control
 		is_s3	 : in  std_logic;
 		is_s4	 : in  std_logic;
 		is_s5	 : in  std_logic;
-		leave_s5 : in  std_logic;
 		count0	 : in  std_logic;
 		count3	 : in  std_logic;
 		clk 	 : in  std_logic;
@@ -149,12 +149,12 @@ begin
 	counter4_1: counter4 port map (clk, count_rst, count);
 	
 	-- Generate next state combinatorially
-	state_transition_1: state_transition port map (busy_out, rd_wr, tmavl, tmavr, count, states(0), states(1), states(2), states(4), states(5), s_next);
+	and4_1_1: and4_1 port map (count(3), count(2), count(1), count(0), s5_done);
+	dff_1: dff port map (s5_done, clk, leave_s5, open);
+	state_transition_1: state_transition port map (busy_out, rd_wr, tmavl, tmavr, count(1), states(0), states(1), states(2), states(4), states(5), leave_s5, s_next);
 	
 	-- Generate control signal outputs
-	and4_1_1: and4_1 port map (count(3), count(2), count(1), count(0), s5_done);
-	dff_1: dff port map (s5_done, clk, leave_s5);
-	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), leave_s5, count(0), count(3), clk, not_clk, busy_out, rd_cache, wr_cache, fm, update_lru, mem_en);
+	state_control_1: state_control port map (start, states(0), states(1), states(3), states(4), states(5), count(0), count(3), clk, not_clk, busy_out, rd_cache, wr_cache, fm, update_lru, mem_en);
 	wire_3: wire port map (busy_out, busy);
 	
 end structural;
