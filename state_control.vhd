@@ -72,7 +72,7 @@ begin
 	-- Write Cache
 		-- From state 1 (write hit)
 	--nand2_1_4: nand2_1 port map (is_s1, count0, temp_wc_1);
-	dff_3: dff port map (is_s1, temp_wc_1);
+	dff_3: dff port map (is_s1, clk, temp_wc_1, open);
 		-- From state 5 (read miss); updates on RISING edge
 	inv_2: inv port map (count0, not_count0);
 	nand2_1_4: nand2_1 port map (count3, not_count0, temp_wc_2);
