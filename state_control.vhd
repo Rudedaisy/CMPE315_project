@@ -52,11 +52,10 @@ component dff
 end component;
 
 for inv_1, inv_2, inv_3: inv use entity work.inv(structural);
---for or2_1_1: or2_1 use entity work.or2_1(structural);
-for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6, nand2_1_7, nand2_1_8: nand2_1 use entity work.nand2_1(structural);
-for dff_1, dff_2, dff_3, dff_4, dff_5: dff use entity work.dff(structural);
+for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6, nand2_1_7: nand2_1 use entity work.nand2_1(structural);
+for dff_1, dff_2, dff_3, dff_4, dff_5, dff_6, dff_7: dff use entity work.dff(structural);
 
-signal not_s0, not_count0, not_s3, not_s4, temp_busy_1, temp_busy_2, busy_out, temp_wc_1, temp_wc_2, temp_wc_3, temp_update: std_logic;
+signal not_s0, not_count0, not_s3, not_s4, temp_busy_1, temp_busy_2, busy_out, temp_wc_1, temp_wc_2, temp_wc_3, temp_update_1, temp_update_2: std_logic;
 
 begin
 	
@@ -72,23 +71,25 @@ begin
 	
 	-- Write Cache
 		-- From state 1 (write hit)
-	nand2_1_4: nand2_1 port map (is_s1, count0, temp_wc_1);
+	--nand2_1_4: nand2_1 port map (is_s1, count0, temp_wc_1);
+	dff_3: dff port map (is_s1, temp_wc_1);
 		-- From state 5 (read miss); updates on RISING edge
 	inv_2: inv port map (count0, not_count0);
-	nand2_1_5: nand2_1 port map (count3, not_count0, temp_wc_2);
-	dff_3: dff port map (temp_wc_2, not_clk, temp_wc_3, open); 
+	nand2_1_4: nand2_1 port map (count3, not_count0, temp_wc_2);
+	dff_4: dff port map (temp_wc_2, not_clk, temp_wc_3, open); 
 		-- Final write_cache signal
-	nand2_1_6: nand2_1 port map (temp_wc_1, temp_wc_3, wr_cache);
+	nand2_1_5: nand2_1 port map (temp_wc_1, temp_wc_3, wr_cache);
 	
 	-- From Memory
-	dff_4: dff port map (is_s5, clk, fm, open);
+	dff_5: dff port map (is_s5, clk, fm, open);
 	
 	-- Update LRU
 	inv_3: inv port map (is_s3, not_s3);
-	nand2_1_7: nand2_1 port map (count0, is_s1, temp_update);
-	nand2_1_8: nand2_1 port map (not_s3, temp_update, update_lru);
+	nand2_1_6: nand2_1 port map (count0, is_s1, temp_update_1);
+	nand2_1_7: nand2_1 port map (not_s3, temp_update_1, temp_update_2);
+	dff_6: dff port map (temp_update_2, clk, update_lru, open);
 	
 	-- Memory Enable
-	dff_5: dff port map (is_s4, clk, mem_en, open);
+	dff_7: dff port map (is_s4, clk, mem_en, open);
 	
 end structural;

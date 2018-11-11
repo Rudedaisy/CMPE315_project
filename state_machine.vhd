@@ -41,7 +41,7 @@ component inv
 		output   : out std_logic);
 end component;
 
-component or2_1
+component nor2_1
 	port (
 		input1   : in  std_logic;
 		input2   : in  std_logic;
@@ -117,7 +117,7 @@ end component;
 
 for wire_1, wire_2, wire_3: wire use entity work.wire(structural);
 for inv_1: inv use entity work.inv(structural);
-for or2_1_1: or2_1 use entity work.or2_1(structural);
+for nor2_1_1, nor2_1_2: nor2_1 use entity work.nor2_1(structural);
 for and4_1_1: and4_1 use entity work.and4_1(structural);
 for dff_1: dff use entity work.dff(structural);
 for curr_state_1: curr_state use entity work.curr_state(structural);
@@ -128,7 +128,7 @@ for state_control_1: state_control use entity work.state_control(structural);
 signal s_next: std_logic_vector(2 downto 0);	
 signal count: std_logic_vector(3 downto 0);
 signal states: std_logic_vector(5 downto 0);
-signal not_clk, count_rst, busy_out, s5_done, leave_s5: std_logic;
+signal not_clk, temp_count_rst, count_rst, busy_out, s5_done, leave_s5: std_logic;
 
 begin
 	
@@ -140,7 +140,8 @@ begin
 	inv_1: inv port map (clk, not_clk);
 	
 	-- Generate count reset signal
-	or2_1_1: or2_1 port map (states(0), states(4), count_rst);
+	nor2_1_1: nor2_1 port map (states(0), states(4), temp_count_rst);
+	nor2_1_2: nor2_1 port map (temp_count_rst, clk, count_rst);
 	
 	-- Generate current decoded current state signal on the RISING EDGE
 	curr_state_1: curr_state port map (s_next, rst, not_clk, states);

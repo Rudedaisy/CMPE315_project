@@ -22,16 +22,16 @@ end dff_reset;
 architecture structural of dff_reset is
 
 begin
-  output: process
+  output: process (clk, rst)
 
   begin
 	if (rst = '1') then 
 	  q <= '0';
 	  qbar <= '1';
+    elsif ( clk'EVENT and clk = '0' ) then
+	  q <= d;
+      qbar <= not d ;
 	end if;
-    wait until ( clk'EVENT and clk = '0' );
-    q <= d;
-    qbar <= not d ;
   end process output;
 
 end structural;
