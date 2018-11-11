@@ -37,13 +37,6 @@ component inv
 		output   : out std_logic);
 end component;
 
-component nand2_1
-	port (
-		input1   : in  std_logic;
-		input2   : in  std_logic;
-		output   : out std_logic);
-end component;
-
 component dff
   port(d    : in  std_logic;
        clk  : in  std_logic;
@@ -51,46 +44,63 @@ component dff
        qbar : out std_logic);
 end component;
 
-for inv_1, inv_2, inv_3, inv_4: inv use entity work.inv(structural);
-for nand2_1_1, nand2_1_2, nand2_1_3, nand2_1_4, nand2_1_5, nand2_1_6, nand2_1_7: nand2_1 use entity work.nand2_1(structural);
-for dff_1, dff_2, dff_3, dff_4, dff_5, dff_6, dff_7: dff use entity work.dff(structural);
+component control_busy
+	port (
+		is_s0	 : in  std_logic;
+		not_s3	 : in  std_logic;
+		start	 : in  std_logic;
+		clk 	 : in  std_logic;
+		busy 	 : out std_logic);
+end component;
 
-signal not_s0, not_s1, not_count0, not_s3, not_s4, temp_busy_1, temp_busy_2, busy_out, temp_wc_1, temp_wc_2, temp_wc_3, temp_update_1, temp_update_2: std_logic;
+component control_write_cache
+	port (
+		is_s1	 : in  std_logic;
+		count0	 : in  std_logic;
+		count3	 : in  std_logic;
+		clk 	 : in  std_logic;
+		not_clk  : in  std_logic;
+		wr_cache : out std_logic);
+end component;
+
+component control_update_lru
+	port (
+		is_s1	 : in  std_logic;
+		not_s3   : in  std_logic;
+		count0	 : in  std_logic;
+		clk 	 : in  std_logic;
+		update_lru 	 : out std_logic);
+end component;
+
+for control_busy_1: control_busy use entity work.control_busy(structural);
+for control_write_cache_1: control_write_cache use entity work.control_write_cache(structural);
+for control_update_lru_1: control_update_lru use entity work.control_update_lru(structural);
+for inv_1: inv use entity work.inv(structural);
+for dff_1, dff_2, dff_3: dff use entity work.dff(structural);
+
+signal not_s3 : std_logic;
 
 begin
 	
+	-- General internal signal
+	inv_1: inv port map (is_s3, not_s3);
+	
 	-- Busy
-	inv_1: inv port map (is_s0, not_s0);
-	nand2_1_1: nand2_1 port map (start, not_s3, temp_busy_1);
-	nand2_1_2: nand2_1 port map (not_s0, not_s3, temp_busy_2);
-	nand2_1_3: nand2_1 port map (temp_busy_1, temp_busy_2, busy_out);
-	dff_1: dff port map (busy_out, clk, busy, open);
+	control_busy_1: control_busy port map (is_s0, not_s3, start, clk, busy);
 	
 	-- Read Cache
-	dff_2: dff port map (is_s3, clk, rd_cache, open);
+	dff_1: dff port map (is_s3, clk, rd_cache, open);
 	
 	-- Write Cache
-		-- From state 1 (write hit)
-	--nand2_1_4: nand2_1 port map (is_s1, count0, temp_wc_1);
-	inv_2: inv port map (is_s1, not_s1);
-	dff_3: dff port map (not_s1, clk, temp_wc_1, open);
-		-- From state 5 (read miss); updates on RISING edge
-	inv_3: inv port map (count0, not_count0);
-	nand2_1_4: nand2_1 port map (count3, not_count0, temp_wc_2);
-	dff_4: dff port map (temp_wc_2, not_clk, temp_wc_3, open); 
-		-- Final write_cache signal
-	nand2_1_5: nand2_1 port map (temp_wc_1, temp_wc_3, wr_cache);
+	control_write_cache_1: control_write_cache port map (is_s1, count0, count3, clk, not_clk, wr_cache);
 	
 	-- From Memory
-	dff_5: dff port map (is_s5, clk, fm, open);
+	dff_2: dff port map (is_s5, clk, fm, open);
 	
 	-- Update LRU
-	inv_4: inv port map (is_s3, not_s3);
-	nand2_1_6: nand2_1 port map (count0, is_s1, temp_update_1);
-	nand2_1_7: nand2_1 port map (not_s3, temp_update_1, temp_update_2);
-	dff_6: dff port map (temp_update_2, clk, update_lru, open);
+	control_update_lru_1: control_update_lru port map (is_s1, not_s3, count0, clk, update_lru);
 	
 	-- Memory Enable
-	dff_7: dff port map (is_s4, clk, mem_en, open);
+	dff_3: dff port map (is_s4, clk, mem_en, open);
 	
 end structural;

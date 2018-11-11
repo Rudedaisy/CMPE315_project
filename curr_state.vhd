@@ -65,7 +65,7 @@ signal out6, out7	: std_logic;
 
 begin
 
-	-- And reg inputs with not busy to initialize them
+	-- And reg'd inputs with not busy to initialize them
 	inv_1: inv port map (s_next(2), nots2);
 	inv_2: inv port map (s_next(1), nots1);
 	inv_3: inv port map (s_next(0), nots0);
