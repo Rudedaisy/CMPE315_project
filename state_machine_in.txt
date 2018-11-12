@@ -1,7 +1,120 @@
-00000
-01000
-00000
-10010
-00010
-00010
-00010
+- Reset
+01
+000
+- Do nothing (state 0)
+00
+000
+- Write hit LEFT (state 0)
+10
+010
+- Figure out it's hit (state 1)
+00
+010
+- Let it write (state 1)
+00
+010
+- Busy low, write done, give command, next cycle (state 0)
+00
+010
+- Write hit RIGHT (state 0)
+10
+001
+- Figure out it's hit (state 1)
+00
+010
+- Let it write (state 1)
+00
+010
+- Busy low, write done, give command, next cycle (state 0)
+00
+010
+- Write MISS (state 0)
+10
+000
+- Figure out it's miss (state 2)
+00
+000
+- do nothing (state 2)
+00
+010
+- Busy low, write done, give command, next cycle (state 0)
+00
+010
+- Read hit LEFT (state 0)
+10
+110
+- Busy goes low, data available (state 3)
+00
+110
+- Read data, next command on next cycle (state 0)
+00
+110
+- Read hit RIGHT (state 0)
+10
+101
+- Busy goes low, data available (state 3)
+00
+110
+- Read data, next command on next cycle (state 0)
+00
+110
+- Read MISS (state 0)
+10
+100
+- Figure out it's a miss, mem enable high, wait cycle 1 (state 4)
+00
+100
+- Wait cycle 2 (state 5)
+00
+100
+- Wait cycle 3 (state 5)
+00
+100
+- Wait cycle 4 (state 5)
+00
+100
+- Wait cycle 5 (state 5)
+00
+100
+- Wait cycle 6 (state 5)
+00
+100
+- Wait cycle 7 (state 5)
+00
+100
+- Wait cycle 8 (state 5)
+00
+100
+- 00 byte in, cycle 1 (state 5)
+00
+100
+- 00 byte in, cycle 2 (state 5)
+00
+100
+- 01 byte in, cycle 1 (state 5)
+00
+100
+- 01 byte in, cycle 2 (state 5)
+00
+100
+- 10 byte in, cycle 1 (state 5)
+00
+100
+- 10 byte in, cycle 2 (state 5)
+00
+100
+- 11 byte in, cycle 1 (state 5)
+00
+100
+- 11 byte in, cycle 2 (state 5)
+00
+100
+- Write done let the cache read (state 5)
+00
+100
+- Cache read, correct data should be out for 1 clock cycle (state 3)
+00
+100
+- Read data, give next command on next cycle (state 0)
+00
+100

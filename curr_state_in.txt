@@ -1,0 +1,14 @@
+- Initialize dffs
+0001
+- Next state = 0
+0000
+- Next state = 1
+0010
+- Next state = 2
+0100
+- Next state = 3
+0110
+- Next state = 4
+1000
+- Next state = 5
+1010

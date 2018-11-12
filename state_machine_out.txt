@@ -1,0 +1,105 @@
+ Clock: 2 Start: 0 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 0 Write Cache: U
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 3 Start: 1 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 5 Start: 0 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 7 Start: 1 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 1
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 9 Start: 0 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 11 Start: 1 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 13 Start: 0 Read/Write: 0 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 15 Start: 1 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 16 Start: 0 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 1 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 1 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 18 Start: 1 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 1
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 19 Start: 0 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 1 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 1 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 1 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 21 Start: 1 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 22 Start: 0 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 1
+ Read Cache: 0 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 23 Start: 0 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 1 Memory  Enable: 0
+ Read Cache: 0 Write Cache: 0
+ From Memory: 1 Update Least-Recently-Used: 0 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
+ Clock: 39 Start: 0 Read/Write: 1 Reset: 0
+ Tag-match and Valid Left: 0 Tag-match and Valid Right: 0
+
+ Busy: 0 Memory  Enable: 0
+ Read Cache: 1 Write Cache: 0
+ From Memory: 0 Update Least-Recently-Used: 1 a1_alt: 0 a0_alt: 0
+ ----------------------------------------------
