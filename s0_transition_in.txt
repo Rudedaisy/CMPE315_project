@@ -1,0 +1,24 @@
+- Busy low; write miss
+0000
+- Busy low; write hit right
+0001
+- Busy low; write hit left
+0010
+- Busy low; read miss
+0100
+- Busy low; read hit right
+0101
+- Busy low; read hit left
+0110
+- Busy high; write miss
+1000
+- Busy high; write hit right
+1001
+- Busy high; write hit left
+1010
+- Busy high; read miss
+1100
+- Busy high; read hit right
+1101
+- Busy high; read hit left
+1110

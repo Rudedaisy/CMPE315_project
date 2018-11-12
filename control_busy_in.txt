@@ -1,0 +1,10 @@
+- Initialize dffs
+110
+- State 0; start 0
+110
+- State 0; start 1
+111
+- State 3
+000
+- Neither state 0 nor state 3
+010

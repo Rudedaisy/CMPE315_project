@@ -1,0 +1,39 @@
+- Initialize dffs
+010000
+00
+- State 0; start 0
+010000
+00
+- State 0; start 1
+110000
+00
+- State 1; count 0
+001000
+00
+- State 1; count 1
+001000
+01
+- State 2
+000000
+00
+- State 3; count 0
+000100
+00
+- State 3; count 1
+000100
+01
+- State 4
+000010
+00
+- State 5; count 7- even
+000001
+00
+- State 5; count 7- odd
+000001
+01
+- State 5; count 8+ even
+000001
+10
+- State 5; count 8+ odd
+000001
+11

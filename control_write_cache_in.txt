@@ -1,0 +1,14 @@
+- Initialize dffs
+000
+- Not s1; count 0
+000
+- s1
+100
+- Not s1, count 7 and under; even
+000
+- Not s1, count 7 and under; odd
+001
+- Not s1, count 8+; even
+010
+- Not s1, count 8+; odd
+011

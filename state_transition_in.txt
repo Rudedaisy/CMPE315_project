@@ -1,6 +1,56 @@
+- Initialize dffs
 0000
-00
-10000
 0000
-01
-00001
+000
+- Busy 0; s0; write miss
+0000
+0000
+100
+- Busy 0; s0; read hit
+0110
+0000
+100
+- Busy 1; s0; write hit
+1001
+0000
+100
+- Busy 1; s0; write miss
+1000
+0000
+100
+- Busy 1; s0; read hit
+1110
+0000
+100
+- Busy 1; s0; read miss
+1100
+0000
+100
+- s1 - write hit
+1010
+0000
+000
+- s2 - write miss
+1000
+0000
+000
+- s3 - read hit
+1101
+0000
+000
+- s4 - read miss prep
+1100
+0000
+010
+- s5 - read miss; count 0
+1100
+0000
+001
+- s5 - read miss; count 15
+1100
+1111
+001
+- s5 - read miss; count 16 (overflow)
+1100
+0000
+001

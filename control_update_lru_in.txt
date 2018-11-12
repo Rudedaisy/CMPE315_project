@@ -1,0 +1,14 @@
+- Initialize dffs
+010
+- Not s1 nor s3; count 0
+010
+- Not s1 nor s3; count 1
+011
+- S1; count 0
+110
+- S1; count 1
+111
+- S3; count 0
+000
+- S3; count 1
+001
