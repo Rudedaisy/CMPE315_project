@@ -1,5 +1,5 @@
 --
--- Entity: nor4_1_test 
+-- Entity: and4_1_test 
 -- Architecture : vhdl 
 -- Author: ehanson1
 -- Created On: 11/13/2018 
@@ -9,13 +9,13 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_textio.all;
 use STD.textio.all;
 
-entity nor4_1_test is
+entity and4_1_test is
 
-end nor4_1_test;
+end and4_1_test;
 
-architecture test of nor4_1_test is
+architecture test of and4_1_test is
 
-component nor4_1
+component and4_1
 	port (
 		input1   : in  std_logic;
 		input2   : in  std_logic;
@@ -24,13 +24,13 @@ component nor4_1
 		output   : out std_logic);
 end component;
 
-for nor4_1_1 : nor4_1 use entity work.nor4_1(structural);
+for and4_1_1 : and4_1 use entity work.and4_1(structural);
 	signal input1, input2, input3, input4, output : std_logic;
 	signal clock : std_logic;
 
 begin
 
-nor4_1_1 : nor4_1 port map (input1, input2, input3, input4, output);
+and4_1_1 : and4_1 port map (input1, input2, input3, input4, output);
 
 clk : process
 	begin  -- process clk
@@ -42,8 +42,8 @@ clk : process
 
 io_process: process
 
-	file infile  : text is in "nor4_1_in.txt";
-	file outfile : text is out "nor4_1_out.txt";
+	file infile  : text is in "and4_1_in.txt";
+	file outfile : text is out "and4_1_out.txt";
 	variable inputs					: std_logic_vector(3 downto 0); 
 	variable output_var				: std_logic;
 	variable buf 					: line;

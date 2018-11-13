@@ -1,5 +1,5 @@
 --
--- Entity: nor4_1_test 
+-- Entity: nor3_1_test 
 -- Architecture : vhdl 
 -- Author: ehanson1
 -- Created On: 11/13/2018 
@@ -9,28 +9,27 @@ use IEEE.std_logic_1164.all;
 use IEEE.std_logic_textio.all;
 use STD.textio.all;
 
-entity nor4_1_test is
+entity nor3_1_test is
 
-end nor4_1_test;
+end nor3_1_test;
 
-architecture test of nor4_1_test is
+architecture test of nor3_1_test is
 
-component nor4_1
+component nor3_1
 	port (
 		input1   : in  std_logic;
 		input2   : in  std_logic;
 		input3   : in  std_logic;
-		input4   : in  std_logic;
 		output   : out std_logic);
 end component;
 
-for nor4_1_1 : nor4_1 use entity work.nor4_1(structural);
-	signal input1, input2, input3, input4, output : std_logic;
+for nor3_1_1 : nor3_1 use entity work.nor3_1(structural);
+	signal input1, input2, input3, output : std_logic;
 	signal clock : std_logic;
 
 begin
 
-nor4_1_1 : nor4_1 port map (input1, input2, input3, input4, output);
+nor3_1_1 : nor3_1 port map (input1, input2, input3, output);
 
 clk : process
 	begin  -- process clk
@@ -42,9 +41,9 @@ clk : process
 
 io_process: process
 
-	file infile  : text is in "nor4_1_in.txt";
-	file outfile : text is out "nor4_1_out.txt";
-	variable inputs					: std_logic_vector(3 downto 0); 
+	file infile  : text is in "nor3_1_in.txt";
+	file outfile : text is out "nor3_1_out.txt";
+	variable inputs					: std_logic_vector(2 downto 0); 
 	variable output_var				: std_logic;
 	variable buf 					: line;
 
@@ -54,10 +53,9 @@ begin
 	
 		readline(infile,buf);
 		read (buf,inputs);
-		input1<=inputs(3);
-		input2<=inputs(2);
-		input3<=inputs(1);
-		input4<=inputs(0);
+		input1<=inputs(2);
+		input2<=inputs(1);
+		input3<=inputs(0);
 
 		wait until falling_edge(clock);
 

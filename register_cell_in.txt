@@ -1,0 +1,16 @@
+- Do nothing
+Z0
+- Read uninitialized value
+00
+- Write 0 
+01
+- Write low
+00
+- Test write
+Z0
+- Write 1 
+11
+- Write low
+10
+- Test write
+Z0

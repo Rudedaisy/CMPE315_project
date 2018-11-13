@@ -1,0 +1,18 @@
+- Do nothing
+0000
+- Read uninitialized value
+0010
+- Reset high
+0011
+- Reset low
+0010
+- Update when tmavl is high
+0110
+- Update low
+0010
+- Update when tmavr is high
+1110
+- Update low
+1010
+- Stop reading
+1000

@@ -1,0 +1,196 @@
+- Do nothing
+00000000
+ZZZZZZZZ
+00000
+- Reset
+00000000
+ZZZZZZZZ
+00001
+- Reset low
+00000000
+ZZZZZZZZ
+00000
+- Attempt writing into block 1 byte 1 [write miss]
+11100101
+11111111
+10000
+- Write low
+11100101
+11111111
+00000
+- Attempt reading from block 1 byte 1 [read miss]
+11100101
+ZZZZZZZZ
+01000
+- Read low
+11100101
+ZZZZZZZZ
+01000
+- Turn on from_memory to bring data into cache
+11100100
+ZZZZZZZZ
+00100
+- Write in byte 0
+11100100
+00000001
+10100
+- Write low
+11100100
+00000001
+00100
+- Write in byte 1
+11100101
+00000010
+10100
+- Write low
+11100101
+00000010
+00100
+- Write in byte 2
+11100110
+00000011
+10100
+- Write low
+11100110
+00000011
+00100
+- Write in byte 3
+11100111
+00000100
+10100
+- Write low; FM low
+11100111
+00000100
+00000
+- Now read block 1 byte 1; update LRU
+11100101
+ZZZZZZZZ
+01010
+- Read low; update low
+11100101
+ZZZZZZZZ
+00000
+- Read miss into the other cache [block 1, byte 0]
+10100100
+ZZZZZZZZ
+01000
+- Read low
+10100100
+ZZZZZZZZ
+00000
+- Turn on from_memory to bring data into cache
+10100100
+ZZZZZZZZ
+00100
+- Write in byte 0
+10100100
+10000000
+10100
+- Write low
+10100100
+10000000
+00100
+- Write in byte 1
+10100101
+10000001
+10100
+- Write low
+10100101
+10000001
+00100
+- Write in byte 2
+10100110
+10000010
+10100
+- Write low
+10100110
+10000010
+00100
+- Write in byte 3
+10100111
+10000011
+10100
+- Write low; FM low
+10100111
+10000011
+00000
+- Now read newly added block 1, byte 0; update LRU
+10100100
+ZZZZZZZZ
+01010
+Read low; update low
+10100100
+ZZZZZZZZ
+00000
+- Write into left cache block 1 [write hit]
+11100111
+11111111
+10000
+- Write low; update LRU
+11100111
+11111111
+00010
+- Update low
+11100111
+ZZZZZZZZ
+00000
+- Read value that was just written [read hit]
+11100111
+ZZZZZZZZ
+01000
+- Read low
+11100111
+ZZZZZZZZ
+00000
+- Read miss into the LRU cache [block 1, byte 2]
+00100110
+ZZZZZZZZ
+01000
+- Read low
+00100100
+ZZZZZZZZ
+00000
+- Turn on from_memory to bring data into cache
+00100100
+ZZZZZZZZ
+00100
+- Write in byte 0
+00100100
+10010000
+10100
+- Write low
+00100100
+10010000
+00100
+- Write in byte 1
+00100101
+10010001
+10100
+- Write low
+00100101
+10010001
+00100
+- Write in byte 2
+00100110
+10010010
+10100
+- Write low
+00100110
+10010010
+00100
+- Write in byte 3
+00100111
+10010011
+10100
+- Write low; FM low
+00100111
+10010011
+00000
+- Now read newly added block 1, byte 0; update LRU
+00100100
+ZZZZZZZZ
+01010
+Read low; update low
+00100100
+ZZZZZZZZ
+00000

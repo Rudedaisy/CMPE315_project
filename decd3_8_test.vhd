@@ -50,12 +50,13 @@ clk : process
 io_process: process
 
 	file infile  : text is in "decd3_8_in.txt";
-	--file outfile : text is out "state_transition_out.txt";
+	file outfile : text is out "decd3_8_out.txt";
 	variable sels					: std_logic_vector(2 downto 0);
 	variable out_sigs				: std_logic_vector(7 downto 0);	
 	variable buf 					: line;
 
 begin
+	wait until rising_edge(clock);
 	if not (endfile(infile)) then 
 
 
@@ -77,8 +78,7 @@ begin
 		out_sigs(0) := output1;
 
 		write(buf,out_sigs);
-		writeline(output,buf);
-		--writeline(outfile,buf);
+		writeline(outfile,buf);
 
 	end if;
 

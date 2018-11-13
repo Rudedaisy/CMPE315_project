@@ -1,0 +1,28 @@
+- Do nothing
+ZZZZZZZZ
+ZZZZZZZZ
+Z0
+- Start high; write
+00000001
+11110000
+01
+- Start low
+00000001
+11110000
+00
+- Do nothing 
+ZZZZZZZZ
+ZZZZZZZZ
+Z0
+- Start high; read
+00000010
+00001110
+11
+- Start low
+00000010
+00001110
+10
+- Do nothing 
+ZZZZZZZZ
+ZZZZZZZZ
+Z0
