@@ -1,0 +1,60 @@
+- Do nothing
+00000000
+00
+ZZZZZZZZ
+000
+- Write into block 1 byte 1 when cache disabled (while reading)
+00000010
+01
+11111111
+011
+- Enable cache and perform the same function
+00000010
+01
+11111111
+111
+- Disable write temporarily before switching
+00000010
+01
+11111111
+101
+- Read uninitialized block 5 byte 0
+00100000
+00
+ZZZZZZZZ
+101
+- Write while reading block 5 byte 0
+00100000
+00
+01011111
+111
+- Latch while reading block 5 byte 0
+00100000
+00
+01011111
+101
+- Test latch block 5 byte 0
+00100000
+00
+ZZZZZZZZ
+101
+- Read block 0 byte 0
+00000001
+00
+ZZZZZZZZ
+101
+- Read block 1 byte 1
+00000010
+01
+ZZZZZZZZ
+101
+- Read byte 5 byte 0
+00100000
+00
+ZZZZZZZZ
+101
+- Turn off cache_enable
+00100000
+00
+ZZZZZZZZ
+001

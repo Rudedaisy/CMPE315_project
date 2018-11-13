@@ -1,0 +1,8 @@
+- Send 1
+10
+- Reset
+11
+- Reset low
+10
+- Send 0
+00

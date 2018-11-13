@@ -1,0 +1,24 @@
+- Do nothing
+00000001
+1000
+- Reset
+00000001
+1001
+- Do nothing
+00000001
+1000
+- Enable block 0
+00000001
+1110
+- Write low
+00000001
+1000
+- Attempt to enable block 3 with enable cache low
+00001000
+1010
+- Write low
+00001000
+1000
+- Check vbit block 0
+00000001
+1000

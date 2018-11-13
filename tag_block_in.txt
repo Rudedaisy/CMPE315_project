@@ -1,0 +1,27 @@
+- Do nothing
+ZZZ
+00
+- Read uninitialized value
+ZZZ
+01
+- Write while reading
+010
+11
+- Latch while reading
+010
+01
+- Test latch
+ZZZ
+01
+- Write while reading
+101
+11
+- Latch while reading
+101
+01
+- Test latch 
+ZZZ
+01
+- Turn off read
+ZZZZZZZZ
+00

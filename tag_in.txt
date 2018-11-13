@@ -1,0 +1,28 @@
+- Do nothing
+00000001
+ZZZ
+00
+- Write into block 0
+00000001
+111
+11
+- Latch
+00000001
+111
+10
+- Attempt writing into block 3 with enable low
+00001000
+011
+01
+- Write low
+00001000
+011
+00
+- Compare non-matching numbers to block 0
+00000001
+011
+00
+- Compare matching numbers to block 0
+00000001
+111
+00

@@ -61,7 +61,6 @@ for decd3_8_1: decd3_8 use entity work.decd3_8(structural);
 
 signal nots2, nots1, nots0, next2, next1, next0		: std_logic;
 signal q0, q1, q2	: std_logic;
-signal out6, out7	: std_logic;
 
 begin
 
@@ -77,6 +76,6 @@ begin
 	dff_2: dff port map (next1, not_clk, q1, open);
 	dff_3: dff port map (next0, not_clk, q0, open);
 	
-	decd3_8_1: decd3_8 port map (q0, q1, q2, s_curr(0), s_curr(1), s_curr(2), s_curr(3), s_curr(4), s_curr(5), out6, out7);
+	decd3_8_1: decd3_8 port map (q0, q1, q2, s_curr(0), s_curr(1), s_curr(2), s_curr(3), s_curr(4), s_curr(5), open, open);
 
 end structural;

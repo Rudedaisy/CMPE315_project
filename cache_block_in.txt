@@ -1,0 +1,56 @@
+- Do nothing
+00
+ZZZZZZZZ
+00
+- Read uninitialized byte 0
+00
+ZZZZZZZZ
+01
+- Write while reading byte 0
+00
+01011111
+11
+- Latch while reading byte 0
+00
+01011111
+01
+- Test latch byte 0
+00
+ZZZZZZZZ
+01
+- Read uninitialized byte 2
+10
+ZZZZZZZZ
+01
+- Write while reading
+10
+11100000
+11
+- Latch while reading
+10
+11100000
+01
+- Test latch 
+10
+ZZZZZZZZ
+01
+- Read byte 0
+00
+ZZZZZZZZ
+01
+- Read byte 1
+01
+ZZZZZZZZ
+01
+- Read byte 2
+10
+ZZZZZZZZ
+01
+- Read byte 3
+11
+ZZZZZZZZ
+01
+- Turn off read
+11
+ZZZZZZZZ
+00

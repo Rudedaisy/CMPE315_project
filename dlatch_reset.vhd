@@ -19,7 +19,7 @@ end dlatch_reset;
 architecture structural of dlatch_reset is
 
 begin
-  output: process (d,clk)
+  output: process (d,clk,rst)
 
   begin
     if rst = '1' then

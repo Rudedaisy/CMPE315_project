@@ -1,0 +1,18 @@
+- Do nothing
+Z00
+- Read uninitialized value
+001
+- Write 0 while reading
+011
+- Latch 0 while reading
+001
+- Test latch 0
+Z01
+- Write 1 while reading
+111
+- Latch 1 while reading
+101
+- Test latch 
+Z01
+- Turn off read
+Z00

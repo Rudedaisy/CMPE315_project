@@ -1,0 +1,24 @@
+- Miss; lru = left cache
+0000
+- Miss; lru = right cache 
+0001
+- Hit left; lru = left cache
+0100
+- Hit left; lru = right cache
+0101
+- Hit right; lru = left cache
+0010
+- Hit right; lru = right cache
+0011
+- From memory; miss; lru = left cache
+1000
+- From memory; miss; lru = right cache
+1001
+- From memory; left cache valid; lru = left cache
+1100
+- From memory; left cache valid; lru = right cache
+1101
+- From memory; right cache valid; lru = left cache
+1010
+- From memory; right cache valid; lru = right cache
+1011
