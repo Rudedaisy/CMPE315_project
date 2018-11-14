@@ -37,6 +37,13 @@ component inv
 		output   : out std_logic);
 end component;
 
+component or2_1
+	port (
+		input1   : in  std_logic;
+		input2   : in  std_logic;
+		output   : out std_logic);
+end component;
+
 component dff
   port(d    : in  std_logic;
        clk  : in  std_logic;
@@ -76,9 +83,10 @@ for control_busy_1: control_busy use entity work.control_busy(structural);
 for control_write_cache_1: control_write_cache use entity work.control_write_cache(structural);
 for control_update_lru_1: control_update_lru use entity work.control_update_lru(structural);
 for inv_1: inv use entity work.inv(structural);
+for or2_1_1: or2_1 use entity work.or2_1(structural);
 for dff_1, dff_2, dff_3: dff use entity work.dff(structural);
 
-signal not_s3 : std_logic;
+signal not_s3, temp_fm : std_logic;
 
 begin
 	
@@ -95,7 +103,8 @@ begin
 	control_write_cache_1: control_write_cache port map (is_s1, count0, count3, clk, not_clk, wr_cache);
 	
 	-- From Memory
-	dff_2: dff port map (is_s5, clk, fm, open);
+	or2_1_1: or2_1 port map (is_s4, is_s5, temp_fm);
+	dff_2: dff port map (temp_fm, clk, fm, open);
 	
 	-- Update LRU
 	control_update_lru_1: control_update_lru port map (is_s1, not_s3, count0, clk, update_lru);
